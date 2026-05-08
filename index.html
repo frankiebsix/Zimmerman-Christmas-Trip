@@ -1,0 +1,1649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Christmas Disney World Countdown</title>
+  <style>
+    * { box-sizing: border-box; }
+    :root {
+      --ink: #ffffff;
+      --muted: rgba(255, 255, 255, 0.84);
+      --glass: rgba(255, 255, 255, 0.16);
+      --border: rgba(255, 255, 255, 0.30);
+      --gold: #ffffff;
+      --sky: #d9fff0;
+      --pink: #ffe4e8;
+      --deep: #062817;
+      --holly: #0b7a3b;
+      --berry: #d91f35;
+      --radius: 28px;
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.36);
+    }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 14% 14%, rgba(255, 255, 255, 0.34), transparent 25%),
+        radial-gradient(circle at 85% 15%, rgba(217, 31, 53, 0.34), transparent 25%),
+        radial-gradient(circle at 28% 78%, rgba(11, 122, 59, 0.38), transparent 32%),
+        radial-gradient(circle at 76% 82%, rgba(255, 255, 255, 0.18), transparent 28%),
+        linear-gradient(135deg, #052d19 0%, #0b7a3b 42%, #d91f35 100%);
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "🎄 ✨ ❄️ 🎁 ✨ ❄️ 🎄";
+      position: fixed;
+      left: 50%;
+      top: 76px;
+      transform: translateX(-50%);
+      width: min(1000px, calc(100% - 48px));
+      text-align: center;
+      letter-spacing: 18px;
+      font-size: clamp(1rem, 2.3vw, 1.8rem);
+      opacity: .42;
+      pointer-events: none;
+      z-index: -1;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.25));
+    }
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,.96) 1px, transparent 1.6px),
+        radial-gradient(circle, rgba(217,31,53,.78) 1px, transparent 1.5px),
+        radial-gradient(circle, rgba(11,122,59,.82) 1px, transparent 1.5px);
+      background-size: 94px 94px, 164px 164px, 238px 238px;
+      background-position: 0 0, 60px 70px, 130px 30px;
+      opacity: .40;
+      z-index: -1;
+      pointer-events: none;
+    }
+    .site-header {
+      width: min(1180px, calc(100% - 32px));
+      margin: 18px auto 0;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.10);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 14px 35px rgba(0,0,0,0.22);
+      position: sticky;
+      top: 12px;
+      z-index: 10;
+    }
+    .brand {
+      color: white;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      text-decoration: none;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      cursor: pointer;
+    }
+    .brand-icon {
+      width: 38px; height: 38px; display: grid; place-items: center;
+      border-radius: 50%; background: rgba(255,255,255,0.16);
+    }
+    .site-nav { display: flex; align-items: center; gap: 6px; }
+    .site-nav a {
+      color: rgba(255,255,255,0.86); text-decoration: none; padding: 10px 13px;
+      border-radius: 999px; font-weight: 700; font-size: 0.95rem; cursor: pointer;
+    }
+    .site-nav a:hover, .site-nav a.active { color: #083b24; background: var(--gold); }
+    main { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
+    .page { display: none; padding: 42px 0 44px; }
+    .page.active { display: block; }
+    .hero {
+      min-height: auto;
+      display: block;
+      padding: 36px 0 18px;
+      max-width: 960px;
+    }
+    .eyebrow {
+      color: var(--gold); text-transform: uppercase; letter-spacing: 0.13em;
+      font-size: 0.83rem; font-weight: 900; margin: 0 0 12px;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      font-size: clamp(2.8rem, 6.2vw, 6rem);
+      line-height: 0.96; letter-spacing: -0.06em; margin-bottom: 20px;
+    }
+    h2 { font-size: clamp(1.5rem, 2.4vw, 2.2rem); letter-spacing: -0.04em; }
+    h3 { font-size: 1.35rem; letter-spacing: -0.03em; }
+    .hero-copy, .glass-card p, .magic-card p {
+      color: var(--muted); line-height: 1.65; font-size: 1.05rem;
+    }
+    .hero-copy { max-width: 650px; font-size: 1.14rem; }
+    .hero-actions, .hunt-actions, .trivia-actions {
+      display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px;
+    }
+    .button {
+      border: 0; display: inline-flex; align-items: center; justify-content: center;
+      text-decoration: none; border-radius: 999px; padding: 12px 18px;
+      font-weight: 900; cursor: pointer; transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .button:hover { transform: translateY(-2px); }
+    .button.primary { color: #083b24; background: var(--gold); box-shadow: 0 16px 34px rgba(255,255,255,0.24); }
+    .button.secondary { color: white; background: rgba(255,255,255,0.14); border: 1px solid var(--border); }
+
+    .section-heading {
+      margin-bottom: 18px;
+    }
+
+    .countdown-grid,
+    .feature-grid,
+    .two-column,
+    .weather-grid {
+      display: grid;
+      gap: 22px;
+    }
+
+    .countdown-grid,
+    .top-countdowns {
+      grid-template-columns: repeat(3, minmax(220px, 1fr)) !important;
+      align-items: stretch;
+      margin-bottom: 30px;
+    }
+
+    .feature-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 28px;
+    }
+
+    .two-column {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-bottom: 22px;
+    }
+
+    .top-countdown-heading {
+      margin-top: 4px;
+    }
+
+    .glass-card,
+    .magic-card,
+    .countdown-card,
+    .weather-day {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .magic-card { min-height: 250px; }
+    .card-icon {
+      width: 54px; height: 54px; display: grid; place-items: center; border-radius: 18px;
+      background: rgba(255,255,255,0.14); margin-bottom: 14px; font-size: 1.7rem;
+    }
+    .countdown-card { position: relative; overflow: hidden; }
+    .countdown-card::before {
+      content: ""; position: absolute; inset: 0; background: radial-gradient(circle at top right, rgba(255,216,107,0.18), transparent 35%); pointer-events: none;
+    }
+    .countdown-card > * { position: relative; }
+    .countdown-date { color: var(--gold); font-weight: 900; margin-bottom: 10px; }
+    .countdown-note { color: var(--muted); line-height: 1.55; min-height: 46px; }
+    .time-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 18px; }
+    .time-box {
+      padding: 15px 10px; text-align: center; border-radius: 20px;
+      background: rgba(255,255,255,0.11); border: 1px solid rgba(255,255,255,0.16);
+    }
+    .time-number { display: block; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1; font-weight: 1000; letter-spacing: -0.06em; }
+    .time-label {
+      display: block; margin-top: 8px; color: rgba(255,255,255,0.75);
+      text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.78rem; font-weight: 800;
+    }
+    .small, footer p { color: rgba(255,255,255,0.68); font-size: 0.95rem; line-height: 1.55; }
+    .big-copy { font-size: 1.26rem !important; color: rgba(255,255,255,0.9) !important; }
+    .hunt-area { color: var(--gold); font-weight: 900; margin-bottom: 6px; }
+    .hunt-location { font-size: 1.25rem; font-weight: 900; margin-bottom: 10px; }
+    .answer { margin-top: 18px; color: var(--sky); font-weight: 900; font-size: 1.15rem; display: none; }
+    .answer.show { display: block; }
+    .checklist { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .check-item {
+      display: flex; gap: 12px; align-items: center; padding: 13px 14px; border-radius: 18px;
+      background: rgba(255,255,255,0.11); border: 1px solid rgba(255,255,255,0.14);
+      cursor: pointer; color: rgba(255,255,255,0.88); font-weight: 750;
+    }
+    .check-item input { transform: scale(1.25); accent-color: #ffd86b; }
+    .check-item span.done { text-decoration: line-through; color: rgba(255,255,255,0.55); }
+    .list-toolbar { display: flex; justify-content: space-between; gap: 14px; align-items: center; margin-bottom: 14px; }
+    .timeline { display: grid; gap: 18px; margin-bottom: 24px; }
+    .timeline-item { display: grid; grid-template-columns: 180px 1fr; gap: 18px; align-items: start; }
+    .timeline-date {
+      color: #083b24; background: var(--gold); border-radius: 999px;
+      padding: 10px 12px; text-align: center; font-weight: 1000;
+    }
+    .pretty-list { line-height: 1.9; color: rgba(255,255,255,0.82); }
+    .weather-current {
+      display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: center;
+      margin-bottom: 22px;
+    }
+    .weather-temp { font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 1000; letter-spacing: -0.07em; color: var(--gold); }
+    .weather-grid { grid-template-columns: repeat(7, minmax(0, 1fr)); }
+    .weather-day { padding: 16px; box-shadow: 0 14px 32px rgba(0,0,0,0.22); border-radius: 20px; }
+    .weather-day strong { display: block; margin-bottom: 8px; color: var(--gold); }
+    .weather-day span { display: block; color: rgba(255,255,255,0.78); margin-top: 5px; font-size: .92rem; }
+
+    .park-plan-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      margin-bottom: 24px;
+    }
+    .park-plan-card {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      position: relative;
+      overflow: hidden;
+    }
+    .park-plan-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(133,236,255,0.14), transparent 36%);
+      pointer-events: none;
+    }
+    .park-plan-card > * {
+      position: relative;
+    }
+    .park-date {
+      color: var(--gold);
+      font-weight: 1000;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      font-size: .84rem;
+      margin-bottom: 10px;
+    }
+    .park-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 14px 0;
+    }
+    .park-pill {
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.12);
+      color: rgba(255,255,255,.9);
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-weight: 850;
+      font-size: .88rem;
+    }
+    .plan-list {
+      color: rgba(255,255,255,.82);
+      line-height: 1.75;
+      margin-bottom: 0;
+    }
+
+
+    .food-intro { margin-bottom: 22px; }
+    .food-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      margin-bottom: 24px;
+    }
+    .food-card {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      position: relative;
+      overflow: hidden;
+    }
+    .food-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(255,216,107,0.14), transparent 36%);
+      pointer-events: none;
+    }
+    .food-card > * { position: relative; }
+    .food-location {
+      color: var(--gold);
+      font-weight: 1000;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      font-size: .8rem;
+      margin-bottom: 10px;
+    }
+    .food-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 12px;
+    }
+    .food-columns h3 {
+      font-size: 1rem;
+      color: var(--sky);
+      margin-bottom: 8px;
+    }
+    .food-columns ol {
+      color: rgba(255,255,255,.84);
+      line-height: 1.65;
+      padding-left: 20px;
+      margin: 0;
+    }
+    .food-columns p {
+      color: rgba(255,255,255,.84);
+      margin-bottom: 0;
+    }
+    .food-note {
+      border-top: 1px solid rgba(255,255,255,.14);
+      margin-top: 16px;
+      padding-top: 14px;
+      color: rgba(255,255,255,.72) !important;
+      font-size: .95rem !important;
+    }
+
+
+    .official-photo-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 14px;
+      border: 1px solid rgba(255,255,255,.20);
+      background: rgba(255,255,255,.12);
+      color: var(--gold);
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 9px 13px;
+      font-weight: 900;
+      font-size: .92rem;
+    }
+
+    .official-photo-link:hover {
+      background: rgba(255,216,107,.18);
+      transform: translateY(-1px);
+    }
+
+    footer { width: min(1180px, calc(100% - 32px)); margin: 36px auto 26px; text-align: center; }    @media (max-width: 1060px) {
+      .weather-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 940px) {
+      .feature-grid,
+      .two-column,
+      .park-plan-grid,
+      .food-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .countdown-grid,
+      .top-countdowns {
+        grid-template-columns: repeat(2, minmax(220px, 1fr)) !important;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .site-header {
+        border-radius: 26px;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .site-nav {
+        flex-wrap: wrap;
+      }
+
+      .checklist,
+      .weather-grid,
+      .countdown-grid,
+      .top-countdowns {
+        grid-template-columns: 1fr !important;
+      }
+
+      .timeline-item,
+      .weather-current,
+      .food-columns {
+        grid-template-columns: 1fr;
+      }
+
+      .list-toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <a class="brand" onclick="showPage('home')">
+      <span class="brand-icon">🎄</span>
+      <span>Christmas Disney Countdown</span>
+    </a>
+    <nav class="site-nav">
+      <a class="active" data-page-link="home" onclick="showPage('home')">Home</a>
+      <a data-page-link="daily" onclick="showPage('daily')">Daily Magic</a>
+      <a data-page-link="packing" onclick="showPage('packing')">Packing</a>
+      <a data-page-link="weather" onclick="showPage('weather')">Weather</a>
+      <a data-page-link="parks" onclick="showPage('parks')">Park Plans</a>
+      <a data-page-link="food" onclick="showPage('food')">Food</a>
+      <a data-page-link="trip" onclick="showPage('trip')">Trip Info</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="page active">
+      <div class="hero">
+        <div>
+          <p class="eyebrow">🎄 Walt Disney World • November 20–25, 2026 🎄</p>
+          <h1>A Christmas Disney trip is getting closer.</h1>
+          <p class="hero-copy">
+            Count down to Lightning Lane booking day, arrival day, and the final day of the trip,
+            with a snowy Christmas look, Disney trivia, weather, packing, food notes, and Hidden Mickey hunt locations.
+          </p>
+        </div>      </div>
+
+      <div class="section-heading">
+        <p class="eyebrow">Main countdowns</p>
+        <h2>Important booking and arrival dates</h2>
+      </div>
+      <div id="countdownGrid" class="countdown-grid top-countdowns"></div>
+
+      <section class="feature-grid">
+        <article class="magic-card">
+          <div class="card-icon">🐭</div>
+          <h3>Hidden Mickey Hunt</h3>
+          <div id="miniHiddenMickey"></div>
+          <div class="hunt-actions">
+            <button class="button secondary" onclick="prevHunt()">← Previous</button>
+            <button class="button primary" onclick="nextHunt()">Next →</button>
+          </div>
+        </article>
+
+        <article class="magic-card">
+          <div class="card-icon">❓</div>
+          <h3>Daily Trivia</h3>
+          <p id="miniTrivia">Loading today’s trivia...</p>
+          <div class="trivia-actions">
+            <button class="button primary" onclick="toggleTriviaAnswer('miniTriviaAnswer')">Show Answer</button>
+          </div>
+          <p id="miniTriviaAnswer" class="answer"></p>
+        </article>
+
+        <article class="magic-card">
+          <div class="card-icon">☀️</div>
+          <h3>Orlando Weather</h3>
+          <p id="weatherSummary">Loading Orlando weather...</p>
+          <p id="weatherDetails" class="small"></p>
+          <button class="button secondary" onclick="showPage('weather')">View 14-Day Forecast</button>
+        </article>
+      </section>
+    </section>
+
+    <section id="daily" class="page">
+      <p class="eyebrow">Daily Magic</p>
+      <h1>Hidden Mickey hunt + Disney trivia.</h1>
+
+      <section class="two-column">
+        <article class="glass-card">
+          <div class="card-icon">🐭</div>
+          <h2>Hidden Mickey Hunt</h2>
+          <div id="hiddenMickeyTip"></div>
+          <p id="hiddenMickeyCounter" class="small"></p>
+          <div class="hunt-actions">
+            <button class="button secondary" onclick="prevHunt()">← Previous Hunt</button>
+            <button class="button primary" onclick="nextHunt()">Next Hunt →</button>
+            <button class="button secondary" onclick="randomHunt()">Random</button>
+            <button class="button secondary" onclick="dailyHunt()">Today’s Hunt</button>
+          </div>
+        </article>
+
+        <article class="glass-card">
+          <div class="card-icon">❓</div>
+          <h2>Daily Disney Trivia</h2>
+          <p id="triviaQuestion" class="big-copy">Loading trivia question...</p>
+          <button class="button primary" onclick="toggleTriviaAnswer('triviaAnswer')">Show Answer</button>
+          <p id="triviaAnswer" class="answer"></p>
+        </article>
+      </section>
+
+      <section class="glass-card">
+        <h2>Family Challenge</h2>
+        <p>
+          Each park day, try to find one Hidden Mickey in a queue, one in a shop,
+          and one at your resort. Keep score and crown a Hidden Mickey champion.
+        </p>
+      </section>
+    </section>
+
+    <section id="packing" class="page">
+      <p class="eyebrow">Packing Checklist</p>
+      <h1>Don’t forget the park-day essentials.</h1>
+      <section class="glass-card">
+        <div class="list-toolbar">
+          <h2>Disney Packing List</h2>
+          <button class="button secondary" onclick="resetPackingList()">Reset Checklist</button>
+        </div>
+        <div id="packingList" class="checklist"></div>
+      </section>
+    </section>
+
+    <section id="weather" class="page">
+      <p class="eyebrow">Orlando Weather</p>
+      <h1>Current weather + 14-day projection.</h1>
+
+      <section class="glass-card">
+        <div class="weather-current">
+          <div>
+            <h2>Current Conditions</h2>
+            <p id="weatherCurrentDescription">Loading current Orlando weather...</p>
+            <p id="weatherCurrentDetails" class="small"></p>
+          </div>
+          <div id="weatherCurrentTemp" class="weather-temp">--°</div>
+        </div>
+
+        <h2>Next 14 Days</h2>
+        <div id="weatherGrid" class="weather-grid"></div>
+        <p class="small">
+          Forecasts farther out are projections and will change. Always recheck closer to park days.
+        </p>
+      </section>
+    </section>
+
+
+    <section id="parks" class="page">
+      <p class="eyebrow">Park Plans</p>
+      <h1>November 20–25 park schedule starter.</h1>
+
+      <section class="park-plan-grid">
+        <article class="park-plan-card">
+          <div class="park-date">Friday, November 20, 2026</div>
+          <h2>Arrival + Christmas Kickoff</h2>
+          <div class="park-pill-row">
+            <span class="park-pill">Arrival Day</span>
+            <span class="park-pill">Resort Decor</span>
+            <span class="park-pill">Optional EPCOT</span>
+          </div>
+          <ul class="plan-list">
+            <li>Use this as the easy arrival day unless you already have park tickets planned.</li>
+            <li>If EPCOT is on the plan, this is one of the two Food & Wine days still available.</li>
+            <li>Good evening idea: resort decorations, Disney Springs, or a low-pressure dinner.</li>
+          </ul>
+        </article>
+
+        <article class="park-plan-card">
+          <div class="park-date">Saturday, November 21, 2026</div>
+          <h2>Last Day for EPCOT Food & Wine</h2>
+          <div class="park-pill-row">
+            <span class="park-pill">EPCOT</span>
+            <span class="park-pill">Food & Wine Final Day</span>
+            <span class="park-pill">Remy Hunt</span>
+          </div>
+          <ul class="plan-list">
+            <li>This is the final announced day of the 2026 EPCOT International Food & Wine Festival.</li>
+            <li>Best day to snack around the world, do Remy’s Hide & Squeak, and check Eat to the Beat if a concert fits.</li>
+            <li>Expect festival booths to be popular because it is the closing weekend.</li>
+          </ul>
+        </article>
+
+        <article class="park-plan-card">
+          <div class="park-date">Sunday, November 22, 2026</div>
+          <h2>Magic Kingdom Christmas Day</h2>
+          <div class="park-pill-row">
+            <span class="park-pill">Magic Kingdom</span>
+            <span class="park-pill">Castle Photos</span>
+            <span class="park-pill">Holiday Snacks</span>
+          </div>
+          <ul class="plan-list">
+            <li>Make this the classic Christmas-feel park day: Main Street, castle photos, parades, and holiday treats.</li>
+            <li>If Mickey’s Very Merry Christmas Party lands on this night, decide early whether to buy party tickets or avoid the shorter regular park day.</li>
+            <li>Use Lightning Lane priorities for the biggest must-do rides.</li>
+          </ul>
+        </article>
+
+        <article class="park-plan-card">
+          <div class="park-date">Monday, November 23, 2026</div>
+          <h2>Hollywood Studios Holiday Night</h2>
+          <div class="park-pill-row">
+            <span class="park-pill">Hollywood Studios</span>
+            <span class="park-pill">Holiday Decor</span>
+            <span class="park-pill">Jollywood Watch</span>
+          </div>
+          <ul class="plan-list">
+            <li>Great park for a Christmas nighttime feel, especially around Hollywood Boulevard and Echo Lake.</li>
+            <li>Watch for Disney Jollywood Nights dates once Disney releases the full 2026 party calendar.</li>
+            <li>Good Hidden Mickey hunt day for Tower of Terror, Runaway Railway, and Toy Story Land.</li>
+          </ul>
+        </article>
+
+        <article class="park-plan-card">
+          <div class="park-date">Tuesday, November 24, 2026</div>
+          <h2>Animal Kingdom + Relaxed Evening</h2>
+          <div class="park-pill-row">
+            <span class="park-pill">Animal Kingdom</span>
+            <span class="park-pill">Earlier Morning</span>
+            <span class="park-pill">Resort Night</span>
+          </div>
+          <ul class="plan-list">
+            <li>Animal Kingdom is a strong morning park, then leave room for pool, resort hopping, or Disney Springs.</li>
+            <li>Use the Hidden Mickey list for Harambe, DINOSAUR, Gorilla Falls, and Maharajah Jungle Trek.</li>
+            <li>Good night to recover before checkout/travel day.</li>
+          </ul>
+        </article>
+
+        <article class="park-plan-card">
+          <div class="park-date">Wednesday, November 25, 2026</div>
+          <h2>Final Day / Travel Day</h2>
+          <div class="park-pill-row">
+            <span class="park-pill">Checkout</span>
+            <span class="park-pill">Breakfast</span>
+            <span class="park-pill">Last Souvenirs</span>
+          </div>
+          <ul class="plan-list">
+            <li>Keep the plan light unless you have a late departure.</li>
+            <li>Good ideas: character breakfast, resort photos, Disney Springs, or one last monorail loop.</li>
+            <li>Add flight, driving, or checkout details later.</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="glass-card">
+        <h2>Notes to Add Later</h2>
+        <ul class="pretty-list">
+          <li>Hotel or resort name</li>
+          <li>Dining reservations by day</li>
+          <li>Lightning Lane priorities</li>
+          <li>Party dates once Mickey’s Very Merry Christmas Party and Jollywood Nights dates are released</li>
+          <li>Must-do rides, shows, and photo spots</li>
+        </ul>
+      </section>
+    </section>
+
+
+    <section id="food" class="page">
+      <p class="eyebrow">EPCOT Food & Wine + Holiday Food Watch</p>
+      <h1>Food plan for November 20–25.</h1>
+
+      <section class="glass-card food-intro">
+        <h2>Important festival timing</h2>
+        <p>
+          The 2026 EPCOT International Food & Wine Festival is officially listed for August 27 through November 21, 2026.
+          That means it should be active for the first two days of this trip only: Friday, November 20 and Saturday, November 21.
+          After that, do not count on Food & Wine booths being open.
+        </p>
+        <p class="small">
+          Disney says the final 2026 marketplace menus and opening dates are still coming later, so this page is built as a smart starter plan instead of pretending the full booth list is known.
+        </p>
+      </section>
+
+      <section class="glass-card food-intro">
+        <h2>Best strategy</h2>
+        <ul class="pretty-list">
+          <li><strong>Use EPCOT on Nov. 20 or Nov. 21</strong> if Food & Wine matters to the group.</li>
+          <li><strong>Saturday, Nov. 21 is the closing day,</strong> so go earlier in the day if you want shorter booth lines.</li>
+          <li><strong>For Nov. 22–25,</strong> shift the food focus to Christmas snacks, resort dining, Magic Kingdom holiday treats, Disney Springs, and whatever holiday food Disney announces closer to the trip.</li>
+          <li><strong>Gluten-free note:</strong> use Disney’s allergy binder/Cast Member confirmation at each booth because festival menus and prep can change.</li>
+        </ul>
+      </section>
+
+      <section class="food-grid">
+        <article class="food-card">
+          <div class="food-location">EPCOT • Nov. 20–21 only</div>
+          <h2>Food & Wine Must-Check Items</h2>
+          <div class="food-columns">
+            <div>
+              <h3>Returning Sneak Peek</h3>
+              <ol>
+                <li>Street Corn-style Dumplings from Gyozas of the Galaxy</li>
+                <li>Grilled Bushberry-spiced Shrimp Skewer from Australia</li>
+                <li>Kirschwasser Torte from The Alps</li>
+              </ol>
+            </div>
+            <div>
+              <h3>Gluten-Free Plan</h3>
+              <p>Wait for Disney’s full 2026 Foodie Guide, then mark booth items that are listed as gluten-friendly. Until then, shrimp, grilled meats, rice bowls, and naturally gluten-free desserts are the first places to investigate.</p>
+            </div>
+          </div>
+          <p class="food-note">These are the only specific 2026 returning items Disney has previewed so far. Final menus are not fully released yet.</p>
+          <a class="official-photo-link" href="https://disneyparksblog.com/wdw/epcot-international-food-and-wine-festival-delicious-dates-and-details/" target="_blank" rel="noopener">View Disney Parks Blog Preview ↗</a>
+        </article>
+
+        <article class="food-card">
+          <div class="food-location">EPCOT • Family Activities</div>
+          <h2>Food & Wine Extras</h2>
+          <div class="food-columns">
+            <div>
+              <h3>Do These If Time Allows</h3>
+              <ol>
+                <li>Remy’s Ratatouille Hide & Squeak scavenger hunt</li>
+                <li>Emile’s Fromage Montage cheese crawl</li>
+                <li>Eat to the Beat concert, if the artist/time fits</li>
+              </ol>
+            </div>
+            <div>
+              <h3>Best Fit</h3>
+              <p>Great for a relaxed EPCOT day where everyone can snack, split items, and keep moving around World Showcase.</p>
+            </div>
+          </div>
+          <p class="food-note">These are recurring festival features Disney lists for the 2026 event page.</p>
+          <a class="official-photo-link" href="https://disneyworld.disney.go.com/events-tours/epcot/epcot-international-food-and-wine-festival/" target="_blank" rel="noopener">View Official Festival Page ↗</a>
+        </article>
+
+        <article class="food-card">
+          <div class="food-location">Nov. 22–25 • Christmas Food Pivot</div>
+          <h2>After Food & Wine Ends</h2>
+          <div class="food-columns">
+            <div>
+              <h3>Food Focus</h3>
+              <ol>
+                <li>Magic Kingdom Christmas party-style treats if dates line up</li>
+                <li>Hollywood Studios holiday snacks and seasonal drinks</li>
+                <li>Resort hopping for gingerbread displays and lobby treats</li>
+              </ol>
+            </div>
+            <div>
+              <h3>Watch List</h3>
+              <p>Disney’s calendar confirms holiday programming in November and December 2026, but specific party nights and holiday food menus still need to be checked closer to the trip.</p>
+            </div>
+          </div>
+          <p class="food-note">This keeps the site useful after the Food & Wine closing date.</p>
+          <a class="official-photo-link" href="https://disneyworld.disney.go.com/events-tours/calendar/" target="_blank" rel="noopener">View Disney Event Calendar ↗</a>
+        </article>
+
+        <article class="food-card">
+          <div class="food-location">Planning Checklist</div>
+          <h2>Update Later When Menus Drop</h2>
+          <div class="food-columns">
+            <div>
+              <h3>Add Later</h3>
+              <ol>
+                <li>Top 2 items by booth</li>
+                <li>Confirmed gluten-free item by booth</li>
+                <li>Photos from official Disney links</li>
+              </ol>
+            </div>
+            <div>
+              <h3>Why Wait?</h3>
+              <p>The official Disney page says to check back in summer 2026 for more details, and Disney Parks Blog says final menus and marketplace lists are still being prepared.</p>
+            </div>
+          </div>
+          <p class="food-note">Once the full 2026 Foodie Guide is released, this can be turned into the same detailed booth-by-booth format as the earlier site.</p>
+        </article>
+      </section>
+
+      <section class="glass-card">
+        <h2>Sources used</h2>
+        <p class="small">
+          Based on Disney’s official 2026 Food & Wine festival page, Disney Parks Blog’s 2026 Food & Wine preview, and Disney’s Walt Disney World event calendar.
+        </p>
+      </section>
+    </section>
+
+
+    <section id="trip" class="page">
+      <p class="eyebrow">Trip Info</p>
+      <h1>November 20–25, 2026 in one place.</h1>
+      <section class="timeline">
+        <article class="timeline-item">
+          <span class="timeline-date">Sept. 21, 2026</span>
+          <div class="glass-card">
+            <h2>Restaurant Booking Day</h2>
+            <p>60 days before the November 20 arrival. Be ready around 5:00 AM Central / 6:00 AM Eastern. If he is staying at a Disney Resort hotel, he should be able to book dining for the whole trip length that morning, up to a 10-night stay.</p>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <span class="timeline-date">Nov. 13, 2026</span>
+          <div class="glass-card">
+            <h2>Lightning Lane Booking Day</h2>
+            <p>Starter reminder set for 6:00 AM Central / 7:00 AM Eastern, assuming Disney keeps the current 7-day onsite booking window.</p>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <span class="timeline-date">Nov. 20, 2026</span>
+          <div class="glass-card">
+            <h2>Trip Begins</h2>
+            <p>Arrival day and the first day that Food & Wine still overlaps with the trip.</p>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <span class="timeline-date">Nov. 21, 2026</span>
+          <div class="glass-card">
+            <h2>Final Food & Wine Day</h2>
+            <p>The official 2026 EPCOT Food & Wine Festival dates end on this day.</p>
+          </div>
+        </article>
+      </section>
+
+      <section class="glass-card">
+        <h2>Ideas to Add Later</h2>
+        <ul class="pretty-list">
+          <li>Resort and confirmation details</li>
+          <li>Dining reservations</li>
+          <li>Party dates if Mickey’s Very Merry Christmas Party or Jollywood Nights line up</li>
+          <li>Park plans by day</li>
+          <li>Favorite snack checklist</li>
+          <li>Christmas photo spots and resort decorations</li>
+        </ul>
+      </section>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      Made for a magical Christmas-season Walt Disney World trip countdown. Hidden Mickey locations are reported hunt locations and may change with refurbishments.
+    </p>
+  </footer>
+
+  <script>
+    const countdowns = [
+      { title: "Restaurant Booking Day", date: "2026-09-21T05:00:00", prettyDate: "Sept. 21, 2026 • 5:00 AM CT", note: "60 days before arrival. Disney dining usually opens around 6:00 AM Eastern." },
+      { title: "Lightning Lane Booking Day", date: "2026-11-13T06:00:00", prettyDate: "Nov. 13, 2026 • 6:00 AM CT", note: "Starter reminder for 7:00 AM Eastern, assuming the current onsite booking window still applies." },
+      { title: "Trip Begins", date: "2026-11-20T08:00:00", prettyDate: "Nov. 20, 2026", note: "Arrival day for the Christmas-season Disney trip." }
+    ];
+
+    const hiddenMickeyHunts = [
+      {
+            "area": "Magic Kingdom",
+            "location": "Astro Orbiter — far side cement indentation",
+            "clue": "Go to the far side of Astro Orbiter and look for a Mickey-shaped indentation in the cement."
+      },
+      {
+            "area": "Magic Kingdom",
+            "location": "Astro Orbiter — side facing Space Mountain",
+            "clue": "Look closely at the Astro Orbiter side that faces Space Mountain for the Mickey shape."
+      },
+      {
+            "area": "Magic Kingdom",
+            "location": "Big Thunder Mountain Railroad — reentering the station",
+            "clue": "As you reenter the station, look on the grass for three rusty gears arranged like Mickey."
+      },
+      {
+            "area": "Magic Kingdom",
+            "location": "Buzz Lightyear’s Space Ranger Spin — planet on right as you enter",
+            "clue": "As you enter, look at the continents on the planet to your right for a Mickey shape."
+      },
+      {
+            "area": "Magic Kingdom",
+            "location": "Buzz Lightyear’s Space Ranger Spin — planet on left farther in queue",
+            "clue": "Farther along, look for the same planet on the left side and check the continent shapes."
+      },
+      {
+            "area": "Magic Kingdom",
+            "location": "Buzz Lightyear’s Space Ranger Spin — room with batteries",
+            "clue": "On the ride, look left in the room with the batteries for the Mickey-shaped detail."
+      },
+      {
+            "area": "Magic Kingdom",
+            "location": "Buzz Lightyear’s Space Ranger Spin — space video room",
+            "clue": "Look for the planet again in the space video room."
+      },
+      {
+            "area": "Magic Kingdom",
+            "location": "Carousel of Progress — last scene kitchen counter",
+            "clue": "In the final scene, look on the kitchen counter for an object with Mickey ears."
+      },
+      {
+            "area": "Magic Kingdom",
+            "location": "Carousel of Progress — last scene fireplace",
+            "clue": "In the final scene, look on the fireplace for the Mickey nutcracker."
+      },
+      {
+            "area": "Magic Kingdom",
+            "location": "Carousel of Progress — last scene present",
+            "clue": "In the final scene, look for the plush toy peeking out of a present."
+      },
+      {
+            "area": "Magic Kingdom",
+            "location": "Carousel of Progress — last scene wrapping paper",
+            "clue": "In the final scene, study the wrapping paper for a Mickey pattern."
+      },
+      {
+            "area": "Magic Kingdom",
+            "location": "Carousel of Progress — last scene white pepper mill",
+            "clue": "In the final scene, look for the white pepper mill on the kitchen counter."
+      },
+      {
+            "area": "Magic Kingdom",
+            "location": "Carousel of Progress — final scene back-wall painting",
+            "clue": "In the final scene, look at the back-wall painting for an abstract Fantasia-style Mickey."
+      },
+      {
+            "area": "Magic Kingdom",
+            "location": "Columbia Harbour House — main dining room framed map",
+            "clue": "In the main dining room, find the framed wall map made from three circular sections."
+      },
+      {
+            "area": "Magic Kingdom",
+            "location": "Haunted Mansion — first room portrait border",
+            "clue": "In the first entrance room, look at the border around a portrait."
+      },
+      {
+            "area": "Magic Kingdom",
+            "location": "Haunted Mansion — ballroom banquet table",
+            "clue": "In the ballroom scene, look at the arrangement of plates and adjoining saucers on the banquet table."
+      },
+      {
+            "area": "Magic Kingdom",
+            "location": "Haunted Mansion — graveyard grim reaper",
+            "clue": "In the graveyard scene, look at the grim reaper’s left hand; his fingers form a Mickey outline."
+      },
+      {
+            "area": "Magic Kingdom",
+            "location": "it’s a small world — Africa scene elephant vine",
+            "clue": "In the Africa scene, look for purple flowers on a vine on the elephant’s left side."
+      },
+      {
+            "area": "Magic Kingdom",
+            "location": "Jungle Cruise — side of the plane",
+            "clue": "Look at the side of the plane for the Mickey shape."
+      },
+      {
+            "area": "Magic Kingdom",
+            "location": "Jungle Cruise — temple plates",
+            "clue": "In the temple area, look for an arrangement of three plates."
+      },
+      {
+            "area": "Magic Kingdom",
+            "location": "Liberty Tree Tavern — rear wall of waiting area",
+            "clue": "In the waiting area, look on the rear wall for the Mickey."
+      },
+      {
+            "area": "Magic Kingdom",
+            "location": "Liberty Square Riverboat — stocks near entrance",
+            "clue": "Look at the stocks near the entrance."
+      },
+      {
+            "area": "Magic Kingdom",
+            "location": "Mickey’s Star Traders — behind Mickey statue",
+            "clue": "Behind the Mickey Mouse statue, look for a Steamboat Willie-shaped constellation."
+      },
+      {
+            "area": "Magic Kingdom",
+            "location": "Peter Pan’s Flight — tree bark before entrance queue",
+            "clue": "Just before the entrance queue, look closely at the bark of the trees."
+      },
+      {
+            "area": "Magic Kingdom",
+            "location": "Pinocchio Village Haus — Blue Fairy Room",
+            "clue": "In the Blue Fairy Room, look for a dark blue sparkle painted above the banner."
+      },
+      {
+            "area": "Magic Kingdom",
+            "location": "Pirates of the Caribbean — treasure room lamp ironwork",
+            "clue": "In the Treasure Room, check the ironwork on the bottom of four lamps on the left side: one on each of two columns and two near the archway walls."
+      },
+      {
+            "area": "Magic Kingdom",
+            "location": "Pirates of the Caribbean — jail cell lock",
+            "clue": "Look at the lock on the jail cell."
+      },
+      {
+            "area": "Magic Kingdom",
+            "location": "Tomorrowland Transit Authority — Take Flight display",
+            "clue": "In the Take Flight display, the woman getting her hair done has mouse ears on her belt buckle."
+      },
+      {
+            "area": "Magic Kingdom",
+            "location": "Under the Sea – Journey of the Little Mermaid — left queue wall, Nov. 18 near noon",
+            "clue": "In the inside queue, holes in the rockwork create a Mickey-shaped light image on the left rock wall near noon on Mickey’s birthday, November 18."
+      },
+      {
+            "area": "Magic Kingdom",
+            "location": "Under the Sea – Journey of the Little Mermaid — cave entrance to boarding",
+            "clue": "When entering the cave to board the ride, look for the reported Hidden Mickey in that cave scene."
+      },
+      {
+            "area": "Magic Kingdom",
+            "location": "Under the Sea – Journey of the Little Mermaid — exit cloud mural",
+            "clue": "As you exit the ride, look at the cloud mural for a Hidden Mickey."
+      },
+      {
+            "area": "EPCOT",
+            "location": "American Adventure — wagon train painting",
+            "clue": "In the lobby painting of the wagon train heading west, look above the front leg of the foremost oxen."
+      },
+      {
+            "area": "EPCOT",
+            "location": "France — Impressions de France wedding scene",
+            "clue": "In the wedding party scene, look in the background at the center of the second-floor window on the house."
+      },
+      {
+            "area": "EPCOT",
+            "location": "Junkanoo Bus — back side above stairs",
+            "clue": "On the back side of the bus, look above the stairs."
+      },
+      {
+            "area": "EPCOT",
+            "location": "Living with the Land — queue mural bubbles",
+            "clue": "In the queue mural, look at the bubbles in the middle of the mural."
+      },
+      {
+            "area": "EPCOT",
+            "location": "Living with the Land — mural across from loading area",
+            "clue": "Directly across from the loading area, look near the bottom of the mural for three circles."
+      },
+      {
+            "area": "EPCOT",
+            "location": "Living with the Land — film montage nametags",
+            "clue": "After the farm scene, watch the film montage and look at the nametags of EPCOT greenhouse technicians in one of the pictures."
+      },
+      {
+            "area": "EPCOT",
+            "location": "The Circle of Life — Native-American man on horse",
+            "clue": "Look at the small stones in front of the Native-American man on a horse."
+      },
+      {
+            "area": "EPCOT",
+            "location": "The Circle of Life — harvester driver’s baseball cap",
+            "clue": "Look at the baseball cap of the man driving a harvester."
+      },
+      {
+            "area": "EPCOT",
+            "location": "Mexico — Gran Fiesta Tour marketplace scene",
+            "clue": "In the marketplace scene, look for three clay pots arranged like Mickey."
+      },
+      {
+            "area": "EPCOT",
+            "location": "Spaceship Earth — Renaissance Italy scene",
+            "clue": "In the Renaissance Italy scene, look on the page of a book behind the sleeping monk."
+      },
+      {
+            "area": "EPCOT",
+            "location": "Spaceship Earth — teenage boy’s bedroom hat",
+            "clue": "In the teenage boy’s bedroom scene, look at the hat."
+      },
+      {
+            "area": "EPCOT",
+            "location": "Spaceship Earth — teenage boy’s bedroom alarm clock",
+            "clue": "In the same bedroom scene, look at the alarm clock."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Cover Story — outside decorative border",
+            "clue": "Outside the building, look in the decorative border above the first floor."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Disney Studio Store — center of shop platforms",
+            "clue": "In the center of the shop, look at the three circular platforms."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Hollywood & Vine — San Fernando Valley mural",
+            "clue": "Look in the San Fernando Valley wall mural."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Muppet*Vision 3D — outside fountain raft",
+            "clue": "At the outside fountain, look for an inflatable toy raft shaped like Mickey."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Muppet*Vision 3D — 3D glasses sign",
+            "clue": "In the queue area, look at the ‘Top five reasons for turning in your 3D glasses’ sign."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Muppet*Vision 3D — lobby video test pattern",
+            "clue": "In the lobby video, look at the test pattern the second time Scooter crosses the screen."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Muppet*Vision 3D — final scene balloons",
+            "clue": "In the final scene, look at the balloons."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Muppet*Vision 3D — entrance lock",
+            "clue": "When entering the Muppet*Vision 3D show, look for a Hidden Mickey lock."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Mama Melrose’s — waiting area Dalmatian spot",
+            "clue": "In the waiting area, look for the spot on the Dalmatian."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Rock ’n’ Roller Coaster — lobby floor tiles",
+            "clue": "In the lobby, between the doors with marble panels before the next room, look for two sets of three small circles in the floor tiles."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Rock ’n’ Roller Coaster — 8th Street Kidz Band poster",
+            "clue": "In the lobby, find the 8th Street Kidz Band poster; Jesse Camp’s denim jacket has a Mickey patch in the upper left corner."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Rosie’s All-American Café — welding torch gauges",
+            "clue": "In the order area, look for a Mickey head shape in the gauges of a welding torch."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Sci-Fi Dine-In — waiting area purple folder",
+            "clue": "In the waiting area, look on the purple folder on the bulletin board."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Sci-Fi Dine-In — sculpted tree branches",
+            "clue": "Look at the sculpted branches in the tree to the left rear of the screen above the kitchen area."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Stage 1 Company Store — shorts on clothesline",
+            "clue": "Look for a pair of shorts hanging from the clothesline over the counter."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Star Tours — phone directory sign",
+            "clue": "In the queue area, look on the phone directory sign at the front."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Tower of Terror — main balcony designs",
+            "clue": "In the entrance area, just before you go inside, look at the main balcony designs."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Tower of Terror — library video elevator girl",
+            "clue": "In the library video, look for the little girl in the elevator holding a Mickey Mouse plush."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Tower of Terror — library sheet music",
+            "clue": "In the library, look on the sheet music."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Tower of Terror — boiler room water stain",
+            "clue": "In the boiler room, just after the queue splits, look for the water stain on the wall."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Tower of Terror — final drop doors",
+            "clue": "At the doors to the final drop, look for a Mickey in a swirl of stars."
+      },
+      {
+            "area": "Hollywood Studios",
+            "location": "Alien Swirling Saucers — Space Ranger mural",
+            "clue": "Find the Space Ranger mural on the wall and look for three buttons that form Mickey."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "The Boneyard — wooly mammoth dig site",
+            "clue": "At the wooly mammoth dig site, look for a fan with two hardhats."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "The Boneyard — ground-level drinking fountain",
+            "clue": "In the playground, look in the soft ground covering under the ground-level drinking fountain."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "Chester & Hester’s Dinosaur Treasures — cement dinosaur sculpture",
+            "clue": "On the Mr. Imagination cement dinosaur just outside the store, look on the right side of the dinosaur’s neck for a gold Steamboat Willie pin."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "Chester & Hester’s Dino-Rama sign — near TriceraTop Spin",
+            "clue": "Stand beneath the sign with two large dinosaurs holding it up and look at the dinosaur’s wrist."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "Conservation Station — neonatal care green room",
+            "clue": "In the Neonatal Care section, look on the back wall of the green room for a flower to the left of the blue koala."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "Conservation Station — neonatal care pink room",
+            "clue": "In the Neonatal Care section, look on the back wall of the pink room in the bubbles near the ceiling."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "Conservation Station — neonatal care blue sky",
+            "clue": "In the Neonatal Care section, look for Mickey-shaped white fluffy clouds in the light blue sky."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "Song of the Rainforest — cockroach in queue",
+            "clue": "In the queue waiting area, look on the back of a cockroach."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "DINOSAUR — entrance wildlife mural tree bark",
+            "clue": "At the building entrance, in the wall mural of Florida’s Cretaceous-era wildlife, look on the bark of the painted tree in the far left background."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "DINOSAUR — entrance mural water lilies",
+            "clue": "Under the entrance wall mural, look for three floating water lilies."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "DINOSAUR — photo pickup Carnotaurus mural",
+            "clue": "At photo imaging pickup, in the Carnotaurus wall mural, look in a shadow under a fold in the dinosaur’s lower jaw."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "DINOSAUR — laboratory scene whiteboard",
+            "clue": "When passing the lab scene on your left, look for a blue Hidden Mickey drawn on the lower left whiteboard."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "Cretaceous Trail — red and green picture dinosaur",
+            "clue": "At the end of the trail, look on the back of the large red-and-green picture dinosaur."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "Harambe Village — right of Tamu Tamu Refreshments",
+            "clue": "To the right of Tamu Tamu Refreshments, look for a utility cover with pebbles in the ground forming Mickey’s ears."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "Harambe Fruit Market — cement Mickey head",
+            "clue": "At Harambe Fruit Market, look for a section of cement poured into the shape of Mickey’s head."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "Gorilla Falls Exploration Trail — naked mole rat building display case",
+            "clue": "In the naked mole rat building, look in the reflection of lights in the central display case near the wall."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "Gorilla Falls Exploration Trail — Asepso box",
+            "clue": "In the naked mole rat building, look on the Asepso box on the desk to the right of the entrance."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "Gorilla Falls Exploration Trail — backpack corner",
+            "clue": "In the naked mole rat building, look on a backpack in the far left-hand corner of the room."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "Maharajah Jungle Trek — first archway near tiger exhibit",
+            "clue": "Inside the first archway near the tiger exhibit, look at the mural on the left for three leaves forming Mickey."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "Maharajah Jungle Trek — mural past second arch",
+            "clue": "In the mural past the second arch, look in the cloud for the Hidden Mickey."
+      },
+      {
+            "area": "Animal Kingdom",
+            "location": "It’s Tough to Be a Bug — underground room far entrance",
+            "clue": "When you enter the underground room, find the other entrance on the far side; look on the left wall."
+      },
+      {
+            "area": "Disney Springs",
+            "location": "Disney PhotoPass Studio — columns by counter",
+            "clue": "Near the top of the columns on both sides of the counter, look in the design."
+      },
+      {
+            "area": "Disney Springs",
+            "location": "Enzo’s Hideaway Tunnel Bar — corridor wall",
+            "clue": "Look high on the wall along the corridor to the Hideaway for a Mickey among the music notes."
+      },
+      {
+            "area": "Disney Springs",
+            "location": "Disney Springs West Side — My Disney Experience map view",
+            "clue": "On the map, Exposition Park forms Mickey: two planters under the bridge are ears, the larger right tree is the eye, the larger left tree is the nose, and the curved planter is the smile."
+      },
+      {
+            "area": "Walt Disney World roadways",
+            "location": "EPCOT Toll Plaza approach from World Drive — solar farm",
+            "clue": "Before entering the EPCOT Toll Plaza from World Drive, the solar panel field forms a Hidden Mickey visible from above."
+      },
+      {
+            "area": "Disney’s Grand Floridian Resort & Spa",
+            "location": "Lobby ceiling",
+            "clue": "Look up at the ceiling in the lobby for a Hidden Mickey."
+      },
+      {
+            "area": "EPCOT",
+            "location": "The Living Seas Aquarium — Bruce shark photo room",
+            "clue": "In the room where you can take a picture with Bruce the shark, look for the Hidden Mickey in the aquarium area."
+      },
+      {
+            "area": "Magic Kingdom",
+            "location": "Mickey’s PhilharMagic — entrance waiting area",
+            "clue": "At the entrance waiting area, look for the Hidden Mickey reported there."
+      },
+      {
+            "area": "EPCOT",
+            "location": "United States Pavilion — Westward Ho! painting",
+            "clue": "Inside the United States Pavilion, look at the ‘Westward Ho!’ painting by Jack Mart Smith."
+      }
+];
+    const disneyTrivia = [
+      {
+            "question": "What year did Walt Disney World officially open?",
+            "answer": "1971."
+      },
+      {
+            "question": "Which park has Spaceship Earth?",
+            "answer": "EPCOT."
+      },
+      {
+            "question": "Which park has the Tree of Life?",
+            "answer": "Disney’s Animal Kingdom."
+      },
+      {
+            "question": "What is the name of the hotel with a South Pacific theme on the monorail line?",
+            "answer": "Disney’s Polynesian Village Resort."
+      },
+      {
+            "question": "Which Magic Kingdom land has Pirates of the Caribbean?",
+            "answer": "Adventureland."
+      },
+      {
+            "question": "Which park is home to Star Wars: Galaxy’s Edge?",
+            "answer": "Disney’s Hollywood Studios."
+      },
+      {
+            "question": "Which Magic Kingdom attraction features 999 happy haunts?",
+            "answer": "The Haunted Mansion."
+      },
+      {
+            "question": "What nighttime show is famous for fireworks over Cinderella Castle?",
+            "answer": "Happily Ever After."
+      },
+      {
+            "question": "Which EPCOT attraction is inside the giant silver sphere?",
+            "answer": "Spaceship Earth."
+      },
+      {
+            "question": "What is Mickey Mouse’s girlfriend’s name?",
+            "answer": "Minnie Mouse."
+      },
+      {
+            "question": "Which Disney park has Pandora – The World of Avatar?",
+            "answer": "Disney’s Animal Kingdom."
+      },
+      {
+            "question": "Which resort is known for its monorail running through the main building?",
+            "answer": "Disney’s Contemporary Resort."
+      },
+      {
+            "question": "Which Disney World park opened in 1989?",
+            "answer": "Disney’s Hollywood Studios."
+      },
+      {
+            "question": "Which Disney World park opened in 1998?",
+            "answer": "Disney’s Animal Kingdom."
+      },
+      {
+            "question": "What mountain ride is located in Frontierland?",
+            "answer": "Big Thunder Mountain Railroad."
+      },
+      {
+            "question": "Which Disney World resort has the Grand Canyon Concourse?",
+            "answer": "Disney’s Contemporary Resort."
+      },
+      {
+            "question": "Which EPCOT pavilion has the Gran Fiesta Tour?",
+            "answer": "Mexico Pavilion."
+      },
+      {
+            "question": "Which park has Expedition Everest?",
+            "answer": "Disney’s Animal Kingdom."
+      },
+      {
+            "question": "Which Hollywood Studios attraction stars Mickey and Minnie in a cartoon world?",
+            "answer": "Mickey & Minnie’s Runaway Railway."
+      },
+      {
+            "question": "Which Magic Kingdom ride features the song 'Yo Ho'?",
+            "answer": "Pirates of the Caribbean."
+      }
+];
+    const packingItems = [
+      "MagicBands",
+      "Park tickets linked in My Disney Experience",
+      "Portable phone chargers",
+      "Ponchos",
+      "Cooling towels",
+      "Sunscreen",
+      "Comfortable walking shoes",
+      "Autograph book",
+      "Refillable water bottle",
+      "Sunglasses",
+      "Hats",
+      "Snacks for the car or room",
+      "Disney gift cards",
+      "Medication",
+      "Swimsuits",
+      "Band-Aids or blister pads",
+      "Hand sanitizer",
+      "Small backpack or park bag",
+      "Extra socks",
+      "Laundry bag",
+      "Zip-top bags",
+      "Phone charging cords",
+      "Portable fans",
+      "Moleskin for blisters",
+      "Light jacket or hoodie",
+      "Christmas shirts or matching outfits",
+      "Holiday ears or Santa hats",
+      "Kids’ headphones or comfort items"
+];
+
+    let todayTrivia = null;
+    let currentHuntIndex = getDailyIndex(hiddenMickeyHunts.length);
+
+    function showPage(pageId) {
+      document.querySelectorAll(".page").forEach(page => page.classList.remove("active"));
+      document.getElementById(pageId).classList.add("active");
+      document.querySelectorAll("[data-page-link]").forEach(link => link.classList.remove("active"));
+      const activeLink = document.querySelector(`[data-page-link="${pageId}"]`);
+      if (activeLink) activeLink.classList.add("active");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function formatRemaining(ms) {
+      if (ms <= 0) return { days: 0, hours: 0, mins: 0, secs: 0, complete: true };
+      const totalSeconds = Math.floor(ms / 1000);
+      return {
+        days: Math.floor(totalSeconds / 86400),
+        hours: Math.floor((totalSeconds % 86400) / 3600),
+        mins: Math.floor((totalSeconds % 3600) / 60),
+        secs: totalSeconds % 60,
+        complete: false
+      };
+    }
+
+    function createCountdownCard(item, index) {
+      return `
+        <article class="countdown-card">
+          <h3>${item.title}</h3>
+          <div class="countdown-date">${item.prettyDate}</div>
+          <p class="countdown-note">${item.note}</p>
+          <div class="time-grid">
+            <div class="time-box"><span class="time-number" id="days-${index}">--</span><span class="time-label">Days</span></div>
+            <div class="time-box"><span class="time-number" id="hours-${index}">--</span><span class="time-label">Hours</span></div>
+            <div class="time-box"><span class="time-number" id="mins-${index}">--</span><span class="time-label">Mins</span></div>
+            <div class="time-box"><span class="time-number" id="secs-${index}">--</span><span class="time-label">Secs</span></div>
+          </div>
+          <p class="small" id="message-${index}"></p>
+        </article>`;
+    }
+
+    function renderCountdownCards() {
+      document.getElementById("countdownGrid").innerHTML = countdowns.map(createCountdownCard).join("");
+    }
+
+    function updateCountdowns() {
+      const now = new Date().getTime();
+      countdowns.forEach((item, index) => {
+        const remaining = formatRemaining(new Date(item.date).getTime() - now);
+        document.getElementById(`days-${index}`).textContent = remaining.days;
+        document.getElementById(`hours-${index}`).textContent = String(remaining.hours).padStart(2, "0");
+        document.getElementById(`mins-${index}`).textContent = String(remaining.mins).padStart(2, "0");
+        document.getElementById(`secs-${index}`).textContent = String(remaining.secs).padStart(2, "0");
+        document.getElementById(`message-${index}`).textContent = remaining.complete ? "🎉 It’s here. Time for the magic." : "✨ The magic is getting closer.";
+      });
+    }
+
+    function getDailyIndex(length) {
+      const now = new Date();
+      const todayUtc = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+      const seedUtc = Date.UTC(2026, 0, 1);
+      const dayIndex = Math.floor((todayUtc - seedUtc) / 86400000);
+      return ((dayIndex % length) + length) % length;
+    }
+
+    function huntMarkup(hunt) {
+      return `
+        <div class="hunt-area">${hunt.area}</div>
+        <div class="hunt-location">${hunt.location}</div>
+        <p>${hunt.clue}</p>
+      `;
+    }
+
+    function renderHunt() {
+      const hunt = hiddenMickeyHunts[currentHuntIndex];
+      document.getElementById("miniHiddenMickey").innerHTML = huntMarkup(hunt);
+      document.getElementById("hiddenMickeyTip").innerHTML = huntMarkup(hunt);
+      document.getElementById("hiddenMickeyCounter").textContent =
+        `Hidden Mickey Hunt ${currentHuntIndex + 1} of ${hiddenMickeyHunts.length}`;
+    }
+
+    function nextHunt() {
+      currentHuntIndex = (currentHuntIndex + 1) % hiddenMickeyHunts.length;
+      renderHunt();
+    }
+
+    function prevHunt() {
+      currentHuntIndex = (currentHuntIndex - 1 + hiddenMickeyHunts.length) % hiddenMickeyHunts.length;
+      renderHunt();
+    }
+
+    function randomHunt() {
+      currentHuntIndex = Math.floor(Math.random() * hiddenMickeyHunts.length);
+      renderHunt();
+    }
+
+    function dailyHunt() {
+      currentHuntIndex = getDailyIndex(hiddenMickeyHunts.length);
+      renderHunt();
+    }
+
+    function renderTrivia() {
+      const triviaIndex = getDailyIndex(disneyTrivia.length);
+      todayTrivia = disneyTrivia[triviaIndex];
+      document.getElementById("miniTrivia").textContent = todayTrivia.question;
+      document.getElementById("triviaQuestion").textContent = todayTrivia.question;
+      document.getElementById("miniTriviaAnswer").textContent = todayTrivia.answer;
+      document.getElementById("triviaAnswer").textContent = todayTrivia.answer;
+    }
+
+    function toggleTriviaAnswer(answerId) {
+      const answer = document.getElementById(answerId);
+      answer.classList.toggle("show");
+    }
+
+    function renderPackingList() {
+      const container = document.getElementById("packingList");
+      const saved = JSON.parse(localStorage.getItem("packingChecklist") || "{}");
+      container.innerHTML = packingItems.map((item, index) => {
+        const checked = saved[index] ? "checked" : "";
+        const doneClass = saved[index] ? "done" : "";
+        return `<label class="check-item">
+          <input type="checkbox" ${checked} onchange="savePackingItem(${index}, this.checked)" />
+          <span class="${doneClass}" id="packingText-${index}">${item}</span>
+        </label>`;
+      }).join("");
+    }
+
+    function savePackingItem(index, checked) {
+      const saved = JSON.parse(localStorage.getItem("packingChecklist") || "{}");
+      saved[index] = checked;
+      localStorage.setItem("packingChecklist", JSON.stringify(saved));
+      document.getElementById(`packingText-${index}`).classList.toggle("done", checked);
+    }
+
+    function resetPackingList() {
+      localStorage.removeItem("packingChecklist");
+      renderPackingList();
+    }
+
+    function weatherCodeToText(code) {
+      const codes = {
+        0: "Clear sky", 1: "Mainly clear", 2: "Partly cloudy", 3: "Overcast",
+        45: "Fog", 48: "Fog", 51: "Light drizzle", 53: "Drizzle", 55: "Heavy drizzle",
+        61: "Light rain", 63: "Rain", 65: "Heavy rain", 71: "Light snow", 73: "Snow",
+        80: "Rain showers", 81: "Rain showers", 82: "Heavy rain showers", 95: "Thunderstorms"
+      };
+      return codes[code] || "Weather update";
+    }
+
+    function formatWeatherDate(dateString) {
+      const date = new Date(dateString + "T12:00:00");
+      return date.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
+    }
+
+    async function loadOrlandoWeather() {
+      const summary = document.getElementById("weatherSummary");
+      const details = document.getElementById("weatherDetails");
+      const currentDescription = document.getElementById("weatherCurrentDescription");
+      const currentDetails = document.getElementById("weatherCurrentDetails");
+      const currentTempEl = document.getElementById("weatherCurrentTemp");
+      const grid = document.getElementById("weatherGrid");
+
+      try {
+        const url = "https://api.open-meteo.com/v1/forecast?latitude=28.5383&longitude=-81.3792&current=temperature_2m,apparent_temperature,precipitation,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&temperature_unit=fahrenheit&timezone=America%2FNew_York&forecast_days=14";
+        const response = await fetch(url);
+        const data = await response.json();
+
+        const currentTemp = Math.round(data.current.temperature_2m);
+        const feelsLike = Math.round(data.current.apparent_temperature);
+        const weatherText = weatherCodeToText(data.current.weather_code);
+
+        summary.textContent = `${weatherText}. Current Orlando temperature: ${currentTemp}°F, feels like ${feelsLike}°F.`;
+        details.textContent = `Tap “View 14-Day Forecast” to see the full projection.`;
+        currentDescription.textContent = `${weatherText} in Orlando right now.`;
+        currentDetails.textContent = `Current: ${currentTemp}°F. Feels like: ${feelsLike}°F. Current precipitation: ${data.current.precipitation} in.`;
+        currentTempEl.textContent = `${currentTemp}°`;
+
+        grid.innerHTML = data.daily.time.map((date, i) => {
+          const high = Math.round(data.daily.temperature_2m_max[i]);
+          const low = Math.round(data.daily.temperature_2m_min[i]);
+          const rain = data.daily.precipitation_probability_max[i];
+          const text = weatherCodeToText(data.daily.weather_code[i]);
+          return `<article class="weather-day">
+            <strong>${formatWeatherDate(date)}</strong>
+            <span>${text}</span>
+            <span>High: ${high}°F</span>
+            <span>Low: ${low}°F</span>
+            <span>Rain: ${rain}%</span>
+          </article>`;
+        }).join("");
+      } catch (error) {
+        summary.textContent = "Weather could not be loaded right now.";
+        details.textContent = "Check a weather app before park days, especially for afternoon storms.";
+        currentDescription.textContent = "Weather could not be loaded right now.";
+        currentDetails.textContent = "Try refreshing the page.";
+        currentTempEl.textContent = "--°";
+        grid.innerHTML = "";
+      }
+    }
+
+    renderCountdownCards();
+    renderHunt();
+    renderTrivia();
+    renderPackingList();
+    loadOrlandoWeather();
+    updateCountdowns();
+    setInterval(updateCountdowns, 1000);
+  </script>
+</body>
+</html>
