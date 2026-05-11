@@ -3,22 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Christmas Disney World Countdown</title>
+  <title>Zimmerman Family Disney Trip</title>
   <style>
     * { box-sizing: border-box; }
     :root {
       --ink: #ffffff;
-      --muted: rgba(255, 255, 255, 0.84);
-      --glass: rgba(255, 255, 255, 0.16);
-      --border: rgba(255, 255, 255, 0.30);
+      --muted: rgba(255, 255, 255, 0.78);
+      --glass: rgba(255, 255, 255, 0.13);
+      --border: rgba(255, 255, 255, 0.22);
       --gold: #ffffff;
-      --sky: #d9fff0;
-      --pink: #ffe4e8;
-      --deep: #062817;
-      --holly: #0b7a3b;
-      --berry: #d91f35;
+      --sky: #ffe9e9;
+      --pink: #ffcad0;
+      --deep: #063b28;
+      --christmas-red: #c9152e;
+      --christmas-green: #075c3a;
+      --snow: #ffffff;
       --radius: 28px;
-      --shadow: 0 24px 70px rgba(0, 0, 0, 0.36);
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.32);
     }
     body {
       margin: 0;
@@ -26,39 +27,23 @@
       color: var(--ink);
       font-family: Arial, Helvetica, sans-serif;
       background:
-        radial-gradient(circle at 14% 14%, rgba(255, 255, 255, 0.34), transparent 25%),
-        radial-gradient(circle at 85% 15%, rgba(217, 31, 53, 0.34), transparent 25%),
-        radial-gradient(circle at 28% 78%, rgba(11, 122, 59, 0.38), transparent 32%),
-        radial-gradient(circle at 76% 82%, rgba(255, 255, 255, 0.18), transparent 28%),
-        linear-gradient(135deg, #052d19 0%, #0b7a3b 42%, #d91f35 100%);
+        radial-gradient(circle at 15% 14%, rgba(255,255,255,0.30), transparent 22%),
+        radial-gradient(circle at 84% 16%, rgba(201, 21, 46, 0.33), transparent 24%),
+        radial-gradient(circle at 54% 82%, rgba(255,255,255,0.22), transparent 28%),
+        linear-gradient(135deg, #063b28 0%, #075c3a 42%, #9f1027 100%);
       overflow-x: hidden;
-    }
-    body::before {
-      content: "🎄 ✨ ❄️ 🎁 ✨ ❄️ 🎄";
-      position: fixed;
-      left: 50%;
-      top: 76px;
-      transform: translateX(-50%);
-      width: min(1000px, calc(100% - 48px));
-      text-align: center;
-      letter-spacing: 18px;
-      font-size: clamp(1rem, 2.3vw, 1.8rem);
-      opacity: .42;
-      pointer-events: none;
-      z-index: -1;
-      filter: drop-shadow(0 10px 18px rgba(0,0,0,.25));
     }
     body::after {
       content: "";
       position: fixed;
       inset: 0;
       background-image:
-        radial-gradient(circle, rgba(255,255,255,.96) 1px, transparent 1.6px),
-        radial-gradient(circle, rgba(217,31,53,.78) 1px, transparent 1.5px),
-        radial-gradient(circle, rgba(11,122,59,.82) 1px, transparent 1.5px);
-      background-size: 94px 94px, 164px 164px, 238px 238px;
+        radial-gradient(circle, rgba(255,255,255,.85) 1px, transparent 1.4px),
+        radial-gradient(circle, rgba(255,255,255,.65) 1px, transparent 1.5px),
+        radial-gradient(circle, rgba(255,255,255,.85) 1px, transparent 1.5px);
+      background-size: 110px 110px, 170px 170px, 240px 240px;
       background-position: 0 0, 60px 70px, 130px 30px;
-      opacity: .40;
+      opacity: .34;
       z-index: -1;
       pointer-events: none;
     }
@@ -74,8 +59,7 @@
       background: rgba(255,255,255,0.10);
       backdrop-filter: blur(18px);
       box-shadow: 0 14px 35px rgba(0,0,0,0.22);
-      position: sticky;
-      top: 12px;
+      position: relative;
       z-index: 10;
     }
     .brand {
@@ -97,7 +81,7 @@
       color: rgba(255,255,255,0.86); text-decoration: none; padding: 10px 13px;
       border-radius: 999px; font-weight: 700; font-size: 0.95rem; cursor: pointer;
     }
-    .site-nav a:hover, .site-nav a.active { color: #083b24; background: var(--gold); }
+    .site-nav a:hover, .site-nav a.active { color: #063b28; background: var(--gold); }
     main { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
     .page { display: none; padding: 42px 0 44px; }
     .page.active { display: block; }
@@ -131,7 +115,7 @@
       font-weight: 900; cursor: pointer; transition: transform .18s ease, box-shadow .18s ease;
     }
     .button:hover { transform: translateY(-2px); }
-    .button.primary { color: #083b24; background: var(--gold); box-shadow: 0 16px 34px rgba(255,255,255,0.24); }
+    .button.primary { color: #063b28; background: var(--gold); box-shadow: 0 16px 34px rgba(255,216,107,0.25); }
     .button.secondary { color: white; background: rgba(255,255,255,0.14); border: 1px solid var(--border); }
 
     .section-heading {
@@ -148,7 +132,7 @@
 
     .countdown-grid,
     .top-countdowns {
-      grid-template-columns: repeat(3, minmax(220px, 1fr)) !important;
+      grid-template-columns: repeat(4, minmax(210px, 1fr)) !important;
       align-items: stretch;
       margin-bottom: 30px;
     }
@@ -186,7 +170,7 @@
     }
     .countdown-card { position: relative; overflow: hidden; }
     .countdown-card::before {
-      content: ""; position: absolute; inset: 0; background: radial-gradient(circle at top right, rgba(255,216,107,0.18), transparent 35%); pointer-events: none;
+      content: ""; position: absolute; inset: 0; background: radial-gradient(circle at top right, rgba(201,21,46,0.24), transparent 35%); pointer-events: none;
     }
     .countdown-card > * { position: relative; }
     .countdown-date { color: var(--gold); font-weight: 900; margin-bottom: 10px; }
@@ -219,7 +203,7 @@
     .timeline { display: grid; gap: 18px; margin-bottom: 24px; }
     .timeline-item { display: grid; grid-template-columns: 180px 1fr; gap: 18px; align-items: start; }
     .timeline-date {
-      color: #083b24; background: var(--gold); border-radius: 999px;
+      color: #063b28; background: var(--gold); border-radius: 999px;
       padding: 10px 12px; text-align: center; font-weight: 1000;
     }
     .pretty-list { line-height: 1.9; color: rgba(255,255,255,0.82); }
@@ -253,7 +237,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at top right, rgba(133,236,255,0.14), transparent 36%);
+      background: radial-gradient(circle at top right, rgba(255,255,255,0.14), transparent 36%);
       pointer-events: none;
     }
     .park-plan-card > * {
@@ -310,7 +294,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at top right, rgba(255,216,107,0.14), transparent 36%);
+      background: radial-gradient(circle at top right, rgba(255,255,255,0.14), transparent 36%);
       pointer-events: none;
     }
     .food-card > * { position: relative; }
@@ -372,6 +356,106 @@
       transform: translateY(-1px);
     }
 
+
+    .filter-panel {
+      margin: 16px 0 18px;
+      padding: 14px;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 22px;
+      background: rgba(255,255,255,.08);
+    }
+
+    .filter-label {
+      color: rgba(255,255,255,.75);
+      font-weight: 900;
+      margin-bottom: 10px;
+      font-size: .92rem;
+    }
+
+    .filter-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .filter-button {
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.12);
+      color: rgba(255,255,255,.88);
+      border-radius: 999px;
+      padding: 9px 12px;
+      font-weight: 900;
+      cursor: pointer;
+      font-size: .9rem;
+    }
+
+    .filter-button.active {
+      background: var(--gold);
+      color: #1c1541;
+    }
+
+
+    .attraction-select {
+      width: 100%;
+      margin-top: 12px;
+      border: 1px solid rgba(255,255,255,.20);
+      background: rgba(255,255,255,.12);
+      color: white;
+      border-radius: 14px;
+      padding: 11px 12px;
+      font-weight: 850;
+    }
+
+    .attraction-select option {
+      color: #082f66;
+      background: #ffffff;
+    }
+
+    .trivia-counter {
+      color: rgba(255,255,255,.68);
+      font-size: .92rem;
+      margin-top: 10px;
+    }
+
+
+    .hunt-photo-wrap {
+      margin: 14px 0 12px;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.08);
+    }
+
+    .hunt-photo {
+      width: 100%;
+      max-height: 260px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hunt-photo-placeholder {
+      padding: 18px;
+      border: 1px dashed rgba(255,255,255,.24);
+      border-radius: 18px;
+      background: rgba(255,255,255,.07);
+      color: rgba(255,255,255,.74);
+      line-height: 1.55;
+      margin: 14px 0 12px;
+    }
+
+    .hunt-photo-credit {
+      padding: 9px 12px;
+      color: rgba(255,255,255,.68);
+      font-size: .82rem;
+      line-height: 1.4;
+    }
+
+    .hunt-photo-credit a {
+      color: var(--gold);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
     footer { width: min(1180px, calc(100% - 32px)); margin: 36px auto 26px; text-align: center; }    @media (max-width: 1060px) {
       .weather-grid {
         grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -428,8 +512,8 @@
 <body>
   <header class="site-header">
     <a class="brand" onclick="showPage('home')">
-      <span class="brand-icon">🎄</span>
-      <span>Christmas Disney Countdown</span>
+      <span class="brand-icon">🏰</span>
+      <span>Zimmerman Family Disney Trip</span>
     </a>
     <nav class="site-nav">
       <a class="active" data-page-link="home" onclick="showPage('home')">Home</a>
@@ -447,16 +531,16 @@
       <div class="hero">
         <div>
           <p class="eyebrow">🎄 Walt Disney World • November 20–25, 2026 🎄</p>
-          <h1>A Christmas Disney trip is getting closer.</h1>
+          <h1>Zimmerman Family Disney Trip.</h1>
           <p class="hero-copy">
-            Count down to Lightning Lane booking day, arrival day, and the final day of the trip,
-            with a snowy Christmas look, Disney trivia, weather, packing, food notes, and Hidden Mickey hunt locations.
+            Count down to restaurant booking day, Lightning Lane booking day, the start of the trip,
+            and the final Food & Wine overlap weekend — all wrapped in a Christmas-time Disney theme.
           </p>
         </div>      </div>
 
       <div class="section-heading">
         <p class="eyebrow">Main countdowns</p>
-        <h2>Important booking and arrival dates</h2>
+        <h2>Important Zimmerman family Disney dates</h2>
       </div>
       <div id="countdownGrid" class="countdown-grid top-countdowns"></div>
 
@@ -464,10 +548,16 @@
         <article class="magic-card">
           <div class="card-icon">🐭</div>
           <h3>Hidden Mickey Hunt</h3>
+          <div class="filter-panel">
+            <div class="filter-label">Choose where you are:</div>
+            <div id="miniHuntFilters" class="filter-buttons"></div>
+            <select id="miniAttractionFilter" class="attraction-select" onchange="setAttractionFilter(this.value)"></select>
+          </div>
           <div id="miniHiddenMickey"></div>
           <div class="hunt-actions">
             <button class="button secondary" onclick="prevHunt()">← Previous</button>
             <button class="button primary" onclick="nextHunt()">Next →</button>
+            <button class="button secondary" onclick="randomHunt()">Random</button>
           </div>
         </article>
 
@@ -476,9 +566,13 @@
           <h3>Daily Trivia</h3>
           <p id="miniTrivia">Loading today’s trivia...</p>
           <div class="trivia-actions">
+            <button class="button secondary" onclick="prevTrivia()">← Previous</button>
             <button class="button primary" onclick="toggleTriviaAnswer('miniTriviaAnswer')">Show Answer</button>
+            <button class="button secondary" onclick="nextTrivia()">Next →</button>
+            <button class="button secondary" onclick="randomTrivia()">Random</button>
           </div>
           <p id="miniTriviaAnswer" class="answer"></p>
+          <div id="miniTriviaCounter" class="trivia-counter"></div>
         </article>
 
         <article class="magic-card">
@@ -499,8 +593,18 @@
         <article class="glass-card">
           <div class="card-icon">🐭</div>
           <h2>Hidden Mickey Hunt</h2>
+          <div class="filter-panel">
+            <div class="filter-label">Choose where you are:</div>
+            <div id="fullHuntFilters" class="filter-buttons"></div>
+            <select id="fullAttractionFilter" class="attraction-select" onchange="setAttractionFilter(this.value)"></select>
+          </div>
           <div id="hiddenMickeyTip"></div>
           <p id="hiddenMickeyCounter" class="small"></p>
+
+          <p class="small">
+            Photo note: I only embedded images with clear reusable licensing. Most Hidden Mickey photos online are fan/blog photos and should not be copied without permission.
+          </p>
+
           <div class="hunt-actions">
             <button class="button secondary" onclick="prevHunt()">← Previous Hunt</button>
             <button class="button primary" onclick="nextHunt()">Next Hunt →</button>
@@ -513,8 +617,14 @@
           <div class="card-icon">❓</div>
           <h2>Daily Disney Trivia</h2>
           <p id="triviaQuestion" class="big-copy">Loading trivia question...</p>
-          <button class="button primary" onclick="toggleTriviaAnswer('triviaAnswer')">Show Answer</button>
+          <div class="trivia-actions">
+            <button class="button secondary" onclick="prevTrivia()">← Previous</button>
+            <button class="button primary" onclick="toggleTriviaAnswer('triviaAnswer')">Show Answer</button>
+            <button class="button secondary" onclick="nextTrivia()">Next →</button>
+            <button class="button secondary" onclick="randomTrivia()">Random</button>
+          </div>
           <p id="triviaAnswer" class="answer"></p>
+          <div id="triviaCounter" class="trivia-counter"></div>
         </article>
       </section>
 
@@ -564,7 +674,7 @@
 
     <section id="parks" class="page">
       <p class="eyebrow">Park Plans</p>
-      <h1>November 20–25 park schedule starter.</h1>
+      <h1>Zimmerman family park schedule starter.</h1>
 
       <section class="park-plan-grid">
         <article class="park-plan-card">
@@ -572,88 +682,56 @@
           <h2>Arrival + Christmas Kickoff</h2>
           <div class="park-pill-row">
             <span class="park-pill">Arrival Day</span>
-            <span class="park-pill">Resort Decor</span>
-            <span class="park-pill">Optional EPCOT</span>
+            <span class="park-pill">Resort Décor</span>
+            <span class="park-pill">Holiday Photos</span>
           </div>
           <ul class="plan-list">
-            <li>Use this as the easy arrival day unless you already have park tickets planned.</li>
-            <li>If EPCOT is on the plan, this is one of the two Food & Wine days still available.</li>
-            <li>Good evening idea: resort decorations, Disney Springs, or a low-pressure dinner.</li>
+            <li>Use this as the easy arrival day and Christmas kickoff.</li>
+            <li>Great night for resort decorations, Disney Springs, or a relaxed Magic Kingdom area dinner.</li>
+            <li>If they visit EPCOT, Food & Wine is still active.</li>
           </ul>
         </article>
 
         <article class="park-plan-card">
           <div class="park-date">Saturday, November 21, 2026</div>
-          <h2>Last Day for EPCOT Food & Wine</h2>
+          <h2>EPCOT Food & Wine Final Day</h2>
           <div class="park-pill-row">
             <span class="park-pill">EPCOT</span>
-            <span class="park-pill">Food & Wine Final Day</span>
-            <span class="park-pill">Remy Hunt</span>
+            <span class="park-pill">Food & Wine</span>
+            <span class="park-pill">Last Festival Day</span>
           </div>
           <ul class="plan-list">
-            <li>This is the final announced day of the 2026 EPCOT International Food & Wine Festival.</li>
-            <li>Best day to snack around the world, do Remy’s Hide & Squeak, and check Eat to the Beat if a concert fits.</li>
-            <li>Expect festival booths to be popular because it is the closing weekend.</li>
+            <li>This is the key EPCOT day if they want Food & Wine festival booths.</li>
+            <li>Focus on World Showcase, Global Marketplaces, and holiday decorations beginning around property.</li>
+            <li>Use the Hidden Mickey filters for EPCOT pavilions and rides.</li>
           </ul>
         </article>
 
         <article class="park-plan-card">
-          <div class="park-date">Sunday, November 22, 2026</div>
-          <h2>Magic Kingdom Christmas Day</h2>
+          <div class="park-date">Sunday, November 22 – Tuesday, November 24, 2026</div>
+          <h2>Christmas-Time Park Days</h2>
           <div class="park-pill-row">
             <span class="park-pill">Magic Kingdom</span>
-            <span class="park-pill">Castle Photos</span>
-            <span class="park-pill">Holiday Snacks</span>
-          </div>
-          <ul class="plan-list">
-            <li>Make this the classic Christmas-feel park day: Main Street, castle photos, parades, and holiday treats.</li>
-            <li>If Mickey’s Very Merry Christmas Party lands on this night, decide early whether to buy party tickets or avoid the shorter regular park day.</li>
-            <li>Use Lightning Lane priorities for the biggest must-do rides.</li>
-          </ul>
-        </article>
-
-        <article class="park-plan-card">
-          <div class="park-date">Monday, November 23, 2026</div>
-          <h2>Hollywood Studios Holiday Night</h2>
-          <div class="park-pill-row">
             <span class="park-pill">Hollywood Studios</span>
-            <span class="park-pill">Holiday Decor</span>
-            <span class="park-pill">Jollywood Watch</span>
-          </div>
-          <ul class="plan-list">
-            <li>Great park for a Christmas nighttime feel, especially around Hollywood Boulevard and Echo Lake.</li>
-            <li>Watch for Disney Jollywood Nights dates once Disney releases the full 2026 party calendar.</li>
-            <li>Good Hidden Mickey hunt day for Tower of Terror, Runaway Railway, and Toy Story Land.</li>
-          </ul>
-        </article>
-
-        <article class="park-plan-card">
-          <div class="park-date">Tuesday, November 24, 2026</div>
-          <h2>Animal Kingdom + Relaxed Evening</h2>
-          <div class="park-pill-row">
             <span class="park-pill">Animal Kingdom</span>
-            <span class="park-pill">Earlier Morning</span>
-            <span class="park-pill">Resort Night</span>
           </div>
           <ul class="plan-list">
-            <li>Animal Kingdom is a strong morning park, then leave room for pool, resort hopping, or Disney Springs.</li>
-            <li>Use the Hidden Mickey list for Harambe, DINOSAUR, Gorilla Falls, and Maharajah Jungle Trek.</li>
-            <li>Good night to recover before checkout/travel day.</li>
+            <li>Shift the food focus from Food & Wine to Christmas snacks, resort decorations, and holiday overlays.</li>
+            <li>Watch for Mickey’s Very Merry Christmas Party nights at Magic Kingdom once Disney releases the 2026 dates.</li>
+            <li>Hollywood Studios usually has strong holiday décor and seasonal entertainment around this time of year.</li>
           </ul>
         </article>
 
         <article class="park-plan-card">
           <div class="park-date">Wednesday, November 25, 2026</div>
-          <h2>Final Day / Travel Day</h2>
+          <h2>Departure / Thanksgiving Eve</h2>
           <div class="park-pill-row">
-            <span class="park-pill">Checkout</span>
-            <span class="park-pill">Breakfast</span>
-            <span class="park-pill">Last Souvenirs</span>
+            <span class="park-pill">Departure Day</span>
+            <span class="park-pill">Last Photos</span>
           </div>
           <ul class="plan-list">
-            <li>Keep the plan light unless you have a late departure.</li>
-            <li>Good ideas: character breakfast, resort photos, Disney Springs, or one last monorail loop.</li>
-            <li>Add flight, driving, or checkout details later.</li>
+            <li>Keep this flexible for packing, travel, a resort breakfast, or one final park stop.</li>
+            <li>Good day for a final family photo near a Christmas tree or resort lobby display.</li>
           </ul>
         </article>
       </section>
@@ -661,131 +739,115 @@
       <section class="glass-card">
         <h2>Notes to Add Later</h2>
         <ul class="pretty-list">
-          <li>Hotel or resort name</li>
+          <li>Exact park reservations or preferred park order</li>
           <li>Dining reservations by day</li>
           <li>Lightning Lane priorities</li>
-          <li>Party dates once Mickey’s Very Merry Christmas Party and Jollywood Nights dates are released</li>
-          <li>Must-do rides, shows, and photo spots</li>
+          <li>Mickey’s Very Merry Christmas Party date if they decide to attend</li>
+          <li>Must-do Christmas snacks, decorations, rides, and shows</li>
         </ul>
       </section>
     </section>
 
 
     <section id="food" class="page">
-      <p class="eyebrow">EPCOT Food & Wine + Holiday Food Watch</p>
+      <p class="eyebrow">Food & Wine + Christmas Snacks</p>
       <h1>Food plan for November 20–25.</h1>
 
       <section class="glass-card food-intro">
-        <h2>Important festival timing</h2>
+        <h2>Festival timing</h2>
         <p>
-          The 2026 EPCOT International Food & Wine Festival is officially listed for August 27 through November 21, 2026.
-          That means it should be active for the first two days of this trip only: Friday, November 20 and Saturday, November 21.
-          After that, do not count on Food & Wine booths being open.
+          EPCOT International Food & Wine Festival runs August 27 through November 21, 2026. For this trip,
+          that means the Zimmermans should plan Food & Wine for Friday, November 20 or Saturday, November 21.
+          After that, the trip becomes more of a Christmas-time Disney food and snack hunt.
         </p>
         <p class="small">
-          Disney says the final 2026 marketplace menus and opening dates are still coming later, so this page is built as a smart starter plan instead of pretending the full booth list is known.
+          Disney says full Food & Wine details return closer to summer 2026, so treat this page as a planning framework
+          and update the booth list once Disney releases the final menus.
         </p>
       </section>
 
       <section class="glass-card food-intro">
-        <h2>Best strategy</h2>
+        <h2>Quick food strategy</h2>
         <ul class="pretty-list">
-          <li><strong>Use EPCOT on Nov. 20 or Nov. 21</strong> if Food & Wine matters to the group.</li>
-          <li><strong>Saturday, Nov. 21 is the closing day,</strong> so go earlier in the day if you want shorter booth lines.</li>
-          <li><strong>For Nov. 22–25,</strong> shift the food focus to Christmas snacks, resort dining, Magic Kingdom holiday treats, Disney Springs, and whatever holiday food Disney announces closer to the trip.</li>
-          <li><strong>Gluten-free note:</strong> use Disney’s allergy binder/Cast Member confirmation at each booth because festival menus and prep can change.</li>
+          <li><strong>Nov. 20–21:</strong> Prioritize EPCOT Food & Wine Festival booths, World Showcase snacks, and Eat to the Beat details if available.</li>
+          <li><strong>Nov. 22–25:</strong> Pivot to Christmas snacks, resort gingerbread displays if available, holiday popcorn buckets, and seasonal treats.</li>
+          <li><strong>Best family plan:</strong> Make EPCOT the festival food day, then use Magic Kingdom and resort hopping for Christmas photos and desserts.</li>
+          <li><strong>Allergy reminder:</strong> Always verify allergy-friendly options with a Cast Member because menus and cross-contact procedures can change.</li>
         </ul>
       </section>
 
       <section class="food-grid">
         <article class="food-card">
-          <div class="food-location">EPCOT • Nov. 20–21 only</div>
-          <h2>Food & Wine Must-Check Items</h2>
+          <div class="food-location">EPCOT • Nov. 20–21</div>
+          <h2>Food & Wine Festival</h2>
           <div class="food-columns">
             <div>
-              <h3>Returning Sneak Peek</h3>
-              <ol>
-                <li>Street Corn-style Dumplings from Gyozas of the Galaxy</li>
-                <li>Grilled Bushberry-spiced Shrimp Skewer from Australia</li>
-                <li>Kirschwasser Torte from The Alps</li>
-              </ol>
+              <h3>What to Target</h3>
+              <ol><li>Global Marketplace booths</li><li>World Showcase snack route</li><li>Festival passport checklist</li></ol>
             </div>
             <div>
-              <h3>Gluten-Free Plan</h3>
-              <p>Wait for Disney’s full 2026 Foodie Guide, then mark booth items that are listed as gluten-friendly. Until then, shrimp, grilled meats, rice bowls, and naturally gluten-free desserts are the first places to investigate.</p>
+              <h3>Planning Note</h3>
+              <p>The festival ends November 21, so this should be the first food priority if they want the festival experience.</p>
             </div>
           </div>
-          <p class="food-note">These are the only specific 2026 returning items Disney has previewed so far. Final menus are not fully released yet.</p>
-          <a class="official-photo-link" href="https://disneyparksblog.com/wdw/epcot-international-food-and-wine-festival-delicious-dates-and-details/" target="_blank" rel="noopener">View Disney Parks Blog Preview ↗</a>
-        </article>
-
-        <article class="food-card">
-          <div class="food-location">EPCOT • Family Activities</div>
-          <h2>Food & Wine Extras</h2>
-          <div class="food-columns">
-            <div>
-              <h3>Do These If Time Allows</h3>
-              <ol>
-                <li>Remy’s Ratatouille Hide & Squeak scavenger hunt</li>
-                <li>Emile’s Fromage Montage cheese crawl</li>
-                <li>Eat to the Beat concert, if the artist/time fits</li>
-              </ol>
-            </div>
-            <div>
-              <h3>Best Fit</h3>
-              <p>Great for a relaxed EPCOT day where everyone can snack, split items, and keep moving around World Showcase.</p>
-            </div>
-          </div>
-          <p class="food-note">These are recurring festival features Disney lists for the 2026 event page.</p>
+          <p class="food-note">Official booth menus are expected closer to summer 2026.</p>
           <a class="official-photo-link" href="https://disneyworld.disney.go.com/events-tours/epcot/epcot-international-food-and-wine-festival/" target="_blank" rel="noopener">View Official Festival Page ↗</a>
         </article>
 
         <article class="food-card">
-          <div class="food-location">Nov. 22–25 • Christmas Food Pivot</div>
-          <h2>After Food & Wine Ends</h2>
+          <div class="food-location">Magic Kingdom • Christmas Season</div>
+          <h2>Holiday Treat Night</h2>
           <div class="food-columns">
             <div>
-              <h3>Food Focus</h3>
-              <ol>
-                <li>Magic Kingdom Christmas party-style treats if dates line up</li>
-                <li>Hollywood Studios holiday snacks and seasonal drinks</li>
-                <li>Resort hopping for gingerbread displays and lobby treats</li>
-              </ol>
+              <h3>Ideas to Watch</h3>
+              <ol><li>Party-night cookies and cocoa</li><li>Holiday cupcakes or churros</li><li>Seasonal popcorn buckets</li></ol>
             </div>
             <div>
-              <h3>Watch List</h3>
-              <p>Disney’s calendar confirms holiday programming in November and December 2026, but specific party nights and holiday food menus still need to be checked closer to the trip.</p>
+              <h3>Planning Note</h3>
+              <p>Mickey’s Very Merry Christmas Party is expected to return in 2026, but final dates may not be released until later.</p>
             </div>
           </div>
-          <p class="food-note">This keeps the site useful after the Food & Wine closing date.</p>
-          <a class="official-photo-link" href="https://disneyworld.disney.go.com/events-tours/calendar/" target="_blank" rel="noopener">View Disney Event Calendar ↗</a>
+          <p class="food-note">If their dates overlap a party night, decide whether it is worth the separate ticket.</p>
+          <a class="official-photo-link" href="https://disneyworld.disney.go.com/events-tours/magic-kingdom/mickeys-very-merry-christmas-party/" target="_blank" rel="noopener">View Official Christmas Party Page ↗</a>
         </article>
 
         <article class="food-card">
-          <div class="food-location">Planning Checklist</div>
-          <h2>Update Later When Menus Drop</h2>
+          <div class="food-location">Resorts • Christmas Season</div>
+          <h2>Resort Decoration Snack Crawl</h2>
           <div class="food-columns">
             <div>
-              <h3>Add Later</h3>
-              <ol>
-                <li>Top 2 items by booth</li>
-                <li>Confirmed gluten-free item by booth</li>
-                <li>Photos from official Disney links</li>
-              </ol>
+              <h3>Good Stops</h3>
+              <ol><li>Grand Floridian lobby</li><li>Contemporary / Polynesian loop</li><li>BoardWalk and Beach/Yacht Club area</li></ol>
             </div>
             <div>
-              <h3>Why Wait?</h3>
-              <p>The official Disney page says to check back in summer 2026 for more details, and Disney Parks Blog says final menus and marketplace lists are still being prepared.</p>
+              <h3>Planning Note</h3>
+              <p>Use this for a lower-stress evening if parks feel crowded around Thanksgiving week.</p>
             </div>
           </div>
-          <p class="food-note">Once the full 2026 Foodie Guide is released, this can be turned into the same detailed booth-by-booth format as the earlier site.</p>
+          <p class="food-note">Add specific 2026 gingerbread displays once Disney announces them.</p>
+        </article>
+
+        <article class="food-card">
+          <div class="food-location">Disney Springs</div>
+          <h2>Arrival or Departure Meal</h2>
+          <div class="food-columns">
+            <div>
+              <h3>Easy Family Options</h3>
+              <ol><li>Table-service dinner</li><li>Christmas shopping</li><li>Dessert stop</li></ol>
+            </div>
+            <div>
+              <h3>Planning Note</h3>
+              <p>Disney Springs works well on arrival day or departure day when park time is limited.</p>
+            </div>
+          </div>
+          <p class="food-note">Add the family’s actual restaurant preferences later.</p>
         </article>
       </section>
 
       <section class="glass-card">
         <h2>Sources used</h2>
         <p class="small">
-          Based on Disney’s official 2026 Food & Wine festival page, Disney Parks Blog’s 2026 Food & Wine preview, and Disney’s Walt Disney World event calendar.
+          Based on Disney’s official Food & Wine Festival date page and Disney’s official Mickey’s Very Merry Christmas Party page.
         </p>
       </section>
     </section>
@@ -793,34 +855,34 @@
 
     <section id="trip" class="page">
       <p class="eyebrow">Trip Info</p>
-      <h1>November 20–25, 2026 in one place.</h1>
+      <h1>Zimmerman family Disney dates in one place.</h1>
       <section class="timeline">
         <article class="timeline-item">
           <span class="timeline-date">Sept. 21, 2026</span>
           <div class="glass-card">
             <h2>Restaurant Booking Day</h2>
-            <p>60 days before the November 20 arrival. Be ready around 5:00 AM Central / 6:00 AM Eastern. If he is staying at a Disney Resort hotel, he should be able to book dining for the whole trip length that morning, up to a 10-night stay.</p>
+            <p>60-day dining reminder for a November 20 arrival. Be ready around 5:00 AM Central / 6:00 AM Eastern.</p>
           </div>
         </article>
         <article class="timeline-item">
           <span class="timeline-date">Nov. 13, 2026</span>
           <div class="glass-card">
             <h2>Lightning Lane Booking Day</h2>
-            <p>Starter reminder set for 6:00 AM Central / 7:00 AM Eastern, assuming Disney keeps the current 7-day onsite booking window.</p>
+            <p>Planning reminder set for 6:00 AM Central / 7:00 AM Eastern.</p>
           </div>
         </article>
         <article class="timeline-item">
           <span class="timeline-date">Nov. 20, 2026</span>
           <div class="glass-card">
             <h2>Trip Begins</h2>
-            <p>Arrival day and the first day that Food & Wine still overlaps with the trip.</p>
+            <p>Zimmerman Family Disney Trip begins. Christmas season should be active around Walt Disney World.</p>
           </div>
         </article>
         <article class="timeline-item">
-          <span class="timeline-date">Nov. 21, 2026</span>
+          <span class="timeline-date">Nov. 20–21, 2026</span>
           <div class="glass-card">
-            <h2>Final Food & Wine Day</h2>
-            <p>The official 2026 EPCOT Food & Wine Festival dates end on this day.</p>
+            <h2>Food & Wine Festival Overlap</h2>
+            <p>EPCOT Food & Wine runs through November 21, so the festival overlaps the first two days of the trip.</p>
           </div>
         </article>
       </section>
@@ -828,12 +890,13 @@
       <section class="glass-card">
         <h2>Ideas to Add Later</h2>
         <ul class="pretty-list">
-          <li>Resort and confirmation details</li>
+          <li>Hotel confirmation numbers</li>
           <li>Dining reservations</li>
-          <li>Party dates if Mickey’s Very Merry Christmas Party or Jollywood Nights line up</li>
           <li>Park plans by day</li>
+          <li>Flight or driving schedule</li>
+          <li>Christmas party decision</li>
           <li>Favorite snack checklist</li>
-          <li>Christmas photo spots and resort decorations</li>
+          <li>Photo spots near Christmas trees and resort displays</li>
         </ul>
       </section>
     </section>
@@ -841,487 +904,1434 @@
 
   <footer>
     <p>
-      Made for a magical Christmas-season Walt Disney World trip countdown. Hidden Mickey locations are reported hunt locations and may change with refurbishments.
+      Made for the Zimmerman Family Disney Trip • November 20–25, 2026. Hidden Mickey locations are reported hunt locations and may change with refurbishments.
     </p>
   </footer>
 
   <script>
     const countdowns = [
-      { title: "Restaurant Booking Day", date: "2026-09-21T05:00:00", prettyDate: "Sept. 21, 2026 • 5:00 AM CT", note: "60 days before arrival. Disney dining usually opens around 6:00 AM Eastern." },
-      { title: "Lightning Lane Booking Day", date: "2026-11-13T06:00:00", prettyDate: "Nov. 13, 2026 • 6:00 AM CT", note: "Starter reminder for 7:00 AM Eastern, assuming the current onsite booking window still applies." },
-      { title: "Trip Begins", date: "2026-11-20T08:00:00", prettyDate: "Nov. 20, 2026", note: "Arrival day for the Christmas-season Disney trip." }
+      { title: "Restaurant Booking Day", date: "2026-09-21T05:00:00-05:00", prettyDate: "Sept. 21, 2026 • 5:00 AM CT", note: "60-day dining window for a Nov. 20 arrival. Disney usually opens dining around 6:00 AM Eastern." },
+      { title: "Lightning Lane Booking Day", date: "2026-11-13T06:00:00-06:00", prettyDate: "Nov. 13, 2026 • 6:00 AM CT", note: "7-day resort guest planning reminder for a Nov. 20 arrival, based on the current Lightning Lane window." },
+      { title: "Trip Begins", date: "2026-11-20T00:00:00-06:00", prettyDate: "Nov. 20, 2026", note: "Zimmerman family Walt Disney World trip begins." },
+      { title: "Food & Wine Final Weekend", date: "2026-11-21T23:59:00-05:00", prettyDate: "Through Nov. 21, 2026", note: "EPCOT Food & Wine overlaps the trip on Nov. 20 and Nov. 21 only." }
     ];
 
     const hiddenMickeyHunts = [
       {
             "area": "Magic Kingdom",
-            "location": "Astro Orbiter — far side cement indentation",
-            "clue": "Go to the far side of Astro Orbiter and look for a Mickey-shaped indentation in the cement."
+            "land": "Adventureland",
+            "attraction": "Pirates of the Caribbean",
+            "location": "Queue stonework and props",
+            "clue": "Look around the queue’s stone walls, barrels, and themed props before boarding."
       },
       {
             "area": "Magic Kingdom",
-            "location": "Astro Orbiter — side facing Space Mountain",
-            "clue": "Look closely at the Astro Orbiter side that faces Space Mountain for the Mickey shape."
+            "land": "Adventureland",
+            "attraction": "Pirates of the Caribbean",
+            "location": "Jail scene",
+            "clue": "Look near the lock/metal details in the jail scene as you pass the prisoners."
       },
       {
             "area": "Magic Kingdom",
-            "location": "Big Thunder Mountain Railroad — reentering the station",
-            "clue": "As you reenter the station, look on the grass for three rusty gears arranged like Mickey."
+            "land": "Adventureland",
+            "attraction": "Pirates of the Caribbean",
+            "location": "Treasure room",
+            "clue": "Search the lamp/ironwork details in the treasure room scene."
       },
       {
             "area": "Magic Kingdom",
-            "location": "Buzz Lightyear’s Space Ranger Spin — planet on right as you enter",
-            "clue": "As you enter, look at the continents on the planet to your right for a Mickey shape."
+            "land": "Adventureland",
+            "attraction": "Jungle Cruise",
+            "location": "Temple scene",
+            "clue": "Look at the plates and carved details inside the temple scene."
       },
       {
             "area": "Magic Kingdom",
-            "location": "Buzz Lightyear’s Space Ranger Spin — planet on left farther in queue",
-            "clue": "Farther along, look for the same planet on the left side and check the continent shapes."
+            "land": "Adventureland",
+            "attraction": "Jungle Cruise",
+            "location": "Queue maps and crates",
+            "clue": "Check the queue maps, crate labels, and expedition props while waiting."
       },
       {
             "area": "Magic Kingdom",
-            "location": "Buzz Lightyear’s Space Ranger Spin — room with batteries",
-            "clue": "On the ride, look left in the room with the batteries for the Mickey-shaped detail."
+            "land": "Adventureland",
+            "attraction": "Swiss Family Treehouse",
+            "location": "Kitchen area",
+            "clue": "Search the kitchen props and round household items as you climb."
       },
       {
             "area": "Magic Kingdom",
-            "location": "Buzz Lightyear’s Space Ranger Spin — space video room",
-            "clue": "Look for the planet again in the space video room."
+            "land": "Adventureland",
+            "attraction": "Swiss Family Treehouse",
+            "location": "Bedroom area",
+            "clue": "Look at grouped round objects and decorative details in the family living areas."
       },
       {
             "area": "Magic Kingdom",
-            "location": "Carousel of Progress — last scene kitchen counter",
-            "clue": "In the final scene, look on the kitchen counter for an object with Mickey ears."
+            "land": "Adventureland",
+            "attraction": "Enchanted Tiki Room",
+            "location": "Pre-show tiki garden",
+            "clue": "Look at the tiki carvings, flowers, and drums in the pre-show area."
       },
       {
             "area": "Magic Kingdom",
-            "location": "Carousel of Progress — last scene fireplace",
-            "clue": "In the final scene, look on the fireplace for the Mickey nutcracker."
+            "land": "Adventureland",
+            "attraction": "Enchanted Tiki Room",
+            "location": "Theater ceiling/walls",
+            "clue": "Scan the wall patterns and decorative trim while seated."
       },
       {
             "area": "Magic Kingdom",
-            "location": "Carousel of Progress — last scene present",
-            "clue": "In the final scene, look for the plush toy peeking out of a present."
+            "land": "Frontierland",
+            "attraction": "Big Thunder Mountain Railroad",
+            "location": "Reentering station",
+            "clue": "Look for three rusty gears in the grass as the train returns toward the station."
       },
       {
             "area": "Magic Kingdom",
-            "location": "Carousel of Progress — last scene wrapping paper",
-            "clue": "In the final scene, study the wrapping paper for a Mickey pattern."
+            "land": "Frontierland",
+            "attraction": "Big Thunder Mountain Railroad",
+            "location": "Queue mining equipment",
+            "clue": "Search the gears, mine tools, and machinery while in the queue."
       },
       {
             "area": "Magic Kingdom",
-            "location": "Carousel of Progress — last scene white pepper mill",
-            "clue": "In the final scene, look for the white pepper mill on the kitchen counter."
+            "land": "Frontierland",
+            "attraction": "Big Thunder Mountain Railroad",
+            "location": "Rockwork",
+            "clue": "Look for circle groupings hidden in rocks and mining details."
       },
       {
             "area": "Magic Kingdom",
-            "location": "Carousel of Progress — final scene back-wall painting",
-            "clue": "In the final scene, look at the back-wall painting for an abstract Fantasia-style Mickey."
+            "land": "Frontierland",
+            "attraction": "Tom Sawyer Island",
+            "location": "Fort area",
+            "clue": "Look at barrels, lanterns, and wooden details around the fort."
       },
       {
             "area": "Magic Kingdom",
-            "location": "Columbia Harbour House — main dining room framed map",
-            "clue": "In the main dining room, find the framed wall map made from three circular sections."
+            "land": "Frontierland",
+            "attraction": "Tom Sawyer Island",
+            "location": "Cave passages",
+            "clue": "Search the cave walls and props for round groupings."
       },
       {
             "area": "Magic Kingdom",
-            "location": "Haunted Mansion — first room portrait border",
-            "clue": "In the first entrance room, look at the border around a portrait."
+            "land": "Frontierland",
+            "attraction": "Country Bear Jamboree",
+            "location": "Lobby posters",
+            "clue": "Look around the posters and musical display details before entering."
       },
       {
             "area": "Magic Kingdom",
-            "location": "Haunted Mansion — ballroom banquet table",
-            "clue": "In the ballroom scene, look at the arrangement of plates and adjoining saucers on the banquet table."
+            "land": "Frontierland",
+            "attraction": "Country Bear Jamboree",
+            "location": "Theater set pieces",
+            "clue": "Scan stage trim and props during the show."
       },
       {
             "area": "Magic Kingdom",
-            "location": "Haunted Mansion — graveyard grim reaper",
-            "clue": "In the graveyard scene, look at the grim reaper’s left hand; his fingers form a Mickey outline."
+            "land": "Frontierland",
+            "attraction": "Pecos Bill Tall Tale Inn",
+            "location": "Dining room décor",
+            "clue": "Look at wall props, plates, and rustic details in the dining rooms."
       },
       {
             "area": "Magic Kingdom",
-            "location": "it’s a small world — Africa scene elephant vine",
-            "clue": "In the Africa scene, look for purple flowers on a vine on the elephant’s left side."
+            "land": "Liberty Square",
+            "attraction": "Haunted Mansion",
+            "location": "Ballroom dining table",
+            "clue": "Look for the famous plate-and-saucer Mickey arrangement on the ballroom banquet table."
       },
       {
             "area": "Magic Kingdom",
-            "location": "Jungle Cruise — side of the plane",
-            "clue": "Look at the side of the plane for the Mickey shape."
+            "land": "Liberty Square",
+            "attraction": "Haunted Mansion",
+            "location": "Graveyard scene",
+            "clue": "Scan the tombstones, props, and background details near the singing busts."
       },
       {
             "area": "Magic Kingdom",
-            "location": "Jungle Cruise — temple plates",
-            "clue": "In the temple area, look for an arrangement of three plates."
+            "land": "Liberty Square",
+            "attraction": "Haunted Mansion",
+            "location": "Queue crypts",
+            "clue": "Look at the interactive crypts and carved details before entering."
       },
       {
             "area": "Magic Kingdom",
-            "location": "Liberty Tree Tavern — rear wall of waiting area",
-            "clue": "In the waiting area, look on the rear wall for the Mickey."
+            "land": "Liberty Square",
+            "attraction": "Haunted Mansion",
+            "location": "Library/music room area",
+            "clue": "Search books, instruments, and wall details as your Doom Buggy moves through."
       },
       {
             "area": "Magic Kingdom",
-            "location": "Liberty Square Riverboat — stocks near entrance",
-            "clue": "Look at the stocks near the entrance."
+            "land": "Liberty Square",
+            "attraction": "Columbia Harbour House",
+            "location": "Nautical wall décor",
+            "clue": "Look at the nautical decorations, framed pieces, and wall props inside."
       },
       {
             "area": "Magic Kingdom",
-            "location": "Mickey’s Star Traders — behind Mickey statue",
-            "clue": "Behind the Mickey Mouse statue, look for a Steamboat Willie-shaped constellation."
+            "land": "Liberty Square",
+            "attraction": "Columbia Harbour House",
+            "location": "Upstairs dining area",
+            "clue": "Search upstairs wall pieces and maritime displays."
       },
       {
             "area": "Magic Kingdom",
-            "location": "Peter Pan’s Flight — tree bark before entrance queue",
-            "clue": "Just before the entrance queue, look closely at the bark of the trees."
+            "land": "Liberty Square",
+            "attraction": "Hall of Presidents",
+            "location": "Lobby displays",
+            "clue": "Look around the lobby displays, portraits, and architectural trim."
       },
       {
             "area": "Magic Kingdom",
-            "location": "Pinocchio Village Haus — Blue Fairy Room",
-            "clue": "In the Blue Fairy Room, look for a dark blue sparkle painted above the banner."
+            "land": "Liberty Square",
+            "attraction": "Liberty Tree Tavern",
+            "location": "Dining rooms",
+            "clue": "Check plates, fireplace details, and colonial décor."
       },
       {
             "area": "Magic Kingdom",
-            "location": "Pirates of the Caribbean — treasure room lamp ironwork",
-            "clue": "In the Treasure Room, check the ironwork on the bottom of four lamps on the left side: one on each of two columns and two near the archway walls."
+            "land": "Fantasyland",
+            "attraction": "Peter Pan’s Flight",
+            "location": "Interactive nursery queue",
+            "clue": "Look around the nursery toys, wall effects, and shadow details."
       },
       {
             "area": "Magic Kingdom",
-            "location": "Pirates of the Caribbean — jail cell lock",
-            "clue": "Look at the lock on the jail cell."
+            "land": "Fantasyland",
+            "attraction": "Peter Pan’s Flight",
+            "location": "Flying over London",
+            "clue": "Search the moonlit rooftops and room details as the ship takes off."
       },
       {
             "area": "Magic Kingdom",
-            "location": "Tomorrowland Transit Authority — Take Flight display",
-            "clue": "In the Take Flight display, the woman getting her hair done has mouse ears on her belt buckle."
+            "land": "Fantasyland",
+            "attraction": "it’s a small world",
+            "location": "Queue/loading area",
+            "clue": "Look at clockwork shapes and decorative circles while boarding."
       },
       {
             "area": "Magic Kingdom",
-            "location": "Under the Sea – Journey of the Little Mermaid — left queue wall, Nov. 18 near noon",
-            "clue": "In the inside queue, holes in the rockwork create a Mickey-shaped light image on the left rock wall near noon on Mickey’s birthday, November 18."
+            "land": "Fantasyland",
+            "attraction": "it’s a small world",
+            "location": "Finale scene",
+            "clue": "Scan the white-and-gold finale decorations for circle groupings."
       },
       {
             "area": "Magic Kingdom",
-            "location": "Under the Sea – Journey of the Little Mermaid — cave entrance to boarding",
-            "clue": "When entering the cave to board the ride, look for the reported Hidden Mickey in that cave scene."
+            "land": "Fantasyland",
+            "attraction": "Under the Sea – Journey of The Little Mermaid",
+            "location": "Outdoor queue rockwork",
+            "clue": "Look through the rockwork in the queue for a reported sunlight/rockwork Mickey."
       },
       {
             "area": "Magic Kingdom",
-            "location": "Under the Sea – Journey of the Little Mermaid — exit cloud mural",
-            "clue": "As you exit the ride, look at the cloud mural for a Hidden Mickey."
+            "land": "Fantasyland",
+            "attraction": "Under the Sea – Journey of The Little Mermaid",
+            "location": "Cave boarding area",
+            "clue": "Look at cave wall shapes and round details near boarding."
+      },
+      {
+            "area": "Magic Kingdom",
+            "land": "Fantasyland",
+            "attraction": "Under the Sea – Journey of The Little Mermaid",
+            "location": "Exit mural/cloud area",
+            "clue": "Search the cloud and mural details near the exit."
+      },
+      {
+            "area": "Magic Kingdom",
+            "land": "Fantasyland",
+            "attraction": "The Many Adventures of Winnie the Pooh",
+            "location": "Queue honey details",
+            "clue": "Look at honey-themed graphics and play details in the queue."
+      },
+      {
+            "area": "Magic Kingdom",
+            "land": "Fantasyland",
+            "attraction": "The Many Adventures of Winnie the Pooh",
+            "location": "Blustery Day scenes",
+            "clue": "Scan props and round shapes in the windy scenes."
+      },
+      {
+            "area": "Magic Kingdom",
+            "land": "Fantasyland",
+            "attraction": "Mad Tea Party",
+            "location": "Lanterns and teacup patterns",
+            "clue": "Look at lanterns, teacup designs, and decorative circles around the attraction."
+      },
+      {
+            "area": "Magic Kingdom",
+            "land": "Fantasyland",
+            "attraction": "Seven Dwarfs Mine Train",
+            "location": "Interactive gem queue",
+            "clue": "Search the gem-sorting area, jewels, and carved details."
+      },
+      {
+            "area": "Magic Kingdom",
+            "land": "Fantasyland",
+            "attraction": "Seven Dwarfs Mine Train",
+            "location": "Mine scene",
+            "clue": "Look at gems, barrels, and tools in the mine scene."
+      },
+      {
+            "area": "Magic Kingdom",
+            "land": "Fantasyland",
+            "attraction": "Cinderella Castle",
+            "location": "Mosaic walkway",
+            "clue": "Look carefully at the mosaic tiles and round details inside the castle walkway."
+      },
+      {
+            "area": "Magic Kingdom",
+            "land": "Fantasyland",
+            "attraction": "Be Our Guest Restaurant",
+            "location": "Ballroom floor/dishes",
+            "clue": "Look at floor patterns, dishes, and wall details in the ballroom."
+      },
+      {
+            "area": "Magic Kingdom",
+            "land": "Fantasyland",
+            "attraction": "Mickey’s PhilharMagic",
+            "location": "Queue posters",
+            "clue": "Check posters, instrument details, and wall graphics in the lobby."
+      },
+      {
+            "area": "Magic Kingdom",
+            "land": "Tomorrowland",
+            "attraction": "Space Mountain",
+            "location": "Queue panels",
+            "clue": "Search the space station graphics, wall panels, and circular displays."
+      },
+      {
+            "area": "Magic Kingdom",
+            "land": "Tomorrowland",
+            "attraction": "Space Mountain",
+            "location": "Exit walkway",
+            "clue": "Look at space-themed displays and round planetary graphics."
+      },
+      {
+            "area": "Magic Kingdom",
+            "land": "Tomorrowland",
+            "attraction": "Buzz Lightyear’s Space Ranger Spin",
+            "location": "Queue walls",
+            "clue": "Look at colorful planetary graphics and circle groupings."
+      },
+      {
+            "area": "Magic Kingdom",
+            "land": "Tomorrowland",
+            "attraction": "Buzz Lightyear’s Space Ranger Spin",
+            "location": "Ride targets/scenes",
+            "clue": "Scan background panels and props between target areas."
+      },
+      {
+            "area": "Magic Kingdom",
+            "land": "Tomorrowland",
+            "attraction": "PeopleMover",
+            "location": "Tomorrowland views",
+            "clue": "Look down at rooftops, signs, and attraction facades while riding."
+      },
+      {
+            "area": "Magic Kingdom",
+            "land": "Tomorrowland",
+            "attraction": "PeopleMover",
+            "location": "Space Mountain interior pass-through",
+            "clue": "Watch for round shapes and wall details as you pass through Space Mountain."
+      },
+      {
+            "area": "Magic Kingdom",
+            "land": "Tomorrowland",
+            "attraction": "Carousel of Progress",
+            "location": "Pre-show/theater",
+            "clue": "Look around curtains, set trim, and theater wall decorations."
+      },
+      {
+            "area": "Magic Kingdom",
+            "land": "Tomorrowland",
+            "attraction": "Carousel of Progress",
+            "location": "Final scene",
+            "clue": "Search kitchen props and round objects in the final scene."
+      },
+      {
+            "area": "Magic Kingdom",
+            "land": "Tomorrowland",
+            "attraction": "Monsters Inc. Laugh Floor",
+            "location": "Queue screens/posters",
+            "clue": "Look at posters, screen graphics, and queue wall designs."
+      },
+      {
+            "area": "Magic Kingdom",
+            "land": "Tomorrowland",
+            "attraction": "TRON Lightcycle / Run",
+            "location": "Canopy/queue details",
+            "clue": "Look at circular light patterns and grid designs in the queue area."
       },
       {
             "area": "EPCOT",
-            "location": "American Adventure — wagon train painting",
-            "clue": "In the lobby painting of the wagon train heading west, look above the front leg of the foremost oxen."
+            "land": "World Celebration",
+            "attraction": "Spaceship Earth",
+            "location": "Renaissance Italy monk scene",
+            "clue": "Look at the book page behind/near the sleeping monk."
       },
       {
             "area": "EPCOT",
-            "location": "France — Impressions de France wedding scene",
-            "clue": "In the wedding party scene, look in the background at the center of the second-floor window on the house."
+            "land": "World Celebration",
+            "attraction": "Spaceship Earth",
+            "location": "Renaissance artist scene",
+            "clue": "Search the painter/artist area for a Mickey-shaped detail."
       },
       {
             "area": "EPCOT",
-            "location": "Junkanoo Bus — back side above stairs",
-            "clue": "On the back side of the bus, look above the stairs."
+            "land": "World Celebration",
+            "attraction": "Spaceship Earth",
+            "location": "Industrial/communication scenes",
+            "clue": "Look at clocks, papers, and round props in the later scenes."
       },
       {
             "area": "EPCOT",
-            "location": "Living with the Land — queue mural bubbles",
-            "clue": "In the queue mural, look at the bubbles in the middle of the mural."
+            "land": "World Celebration",
+            "attraction": "Spaceship Earth",
+            "location": "Ancient scenes",
+            "clue": "Scan pottery, shields, and wall details in the early scenes."
       },
       {
             "area": "EPCOT",
-            "location": "Living with the Land — mural across from loading area",
-            "clue": "Directly across from the loading area, look near the bottom of the mural for three circles."
+            "land": "World Celebration",
+            "attraction": "Creations Shop",
+            "location": "Display fixtures",
+            "clue": "Look at merchandise displays and circular wall graphics."
       },
       {
             "area": "EPCOT",
-            "location": "Living with the Land — film montage nametags",
-            "clue": "After the farm scene, watch the film montage and look at the nametags of EPCOT greenhouse technicians in one of the pictures."
+            "land": "World Celebration",
+            "attraction": "Club Cool",
+            "location": "Graphic panels",
+            "clue": "Search around drink graphics, signs, and counters."
       },
       {
             "area": "EPCOT",
-            "location": "The Circle of Life — Native-American man on horse",
-            "clue": "Look at the small stones in front of the Native-American man on a horse."
+            "land": "World Celebration",
+            "attraction": "World Celebration gardens",
+            "location": "Pavement/lighting",
+            "clue": "Look for circle groupings in the paving and lighting designs."
       },
       {
             "area": "EPCOT",
-            "location": "The Circle of Life — harvester driver’s baseball cap",
-            "clue": "Look at the baseball cap of the man driving a harvester."
+            "land": "World Celebration",
+            "attraction": "Dreamers Point",
+            "location": "Planters/benches",
+            "clue": "Search landscaping and seating design details."
       },
       {
             "area": "EPCOT",
-            "location": "Mexico — Gran Fiesta Tour marketplace scene",
-            "clue": "In the marketplace scene, look for three clay pots arranged like Mickey."
+            "land": "World Celebration",
+            "attraction": "Connections Café",
+            "location": "Wall and tile patterns",
+            "clue": "Look at tilework, murals, and circular design elements."
       },
       {
             "area": "EPCOT",
-            "location": "Spaceship Earth — Renaissance Italy scene",
-            "clue": "In the Renaissance Italy scene, look on the page of a book behind the sleeping monk."
+            "land": "World Celebration",
+            "attraction": "EPCOT entrance",
+            "location": "Planters/pavement",
+            "clue": "Look for Mickey-shaped groupings in landscaping and paving details."
       },
       {
             "area": "EPCOT",
-            "location": "Spaceship Earth — teenage boy’s bedroom hat",
-            "clue": "In the teenage boy’s bedroom scene, look at the hat."
+            "land": "World Nature",
+            "attraction": "Living with the Land",
+            "location": "Queue mural bubbles",
+            "clue": "Look at the bubbles in the queue mural for reported Mickey shapes."
       },
       {
             "area": "EPCOT",
-            "location": "Spaceship Earth — teenage boy’s bedroom alarm clock",
-            "clue": "In the same bedroom scene, look at the alarm clock."
-      },
-      {
-            "area": "Hollywood Studios",
-            "location": "Cover Story — outside decorative border",
-            "clue": "Outside the building, look in the decorative border above the first floor."
-      },
-      {
-            "area": "Hollywood Studios",
-            "location": "Disney Studio Store — center of shop platforms",
-            "clue": "In the center of the shop, look at the three circular platforms."
-      },
-      {
-            "area": "Hollywood Studios",
-            "location": "Hollywood & Vine — San Fernando Valley mural",
-            "clue": "Look in the San Fernando Valley wall mural."
-      },
-      {
-            "area": "Hollywood Studios",
-            "location": "Muppet*Vision 3D — outside fountain raft",
-            "clue": "At the outside fountain, look for an inflatable toy raft shaped like Mickey."
-      },
-      {
-            "area": "Hollywood Studios",
-            "location": "Muppet*Vision 3D — 3D glasses sign",
-            "clue": "In the queue area, look at the ‘Top five reasons for turning in your 3D glasses’ sign."
-      },
-      {
-            "area": "Hollywood Studios",
-            "location": "Muppet*Vision 3D — lobby video test pattern",
-            "clue": "In the lobby video, look at the test pattern the second time Scooter crosses the screen."
-      },
-      {
-            "area": "Hollywood Studios",
-            "location": "Muppet*Vision 3D — final scene balloons",
-            "clue": "In the final scene, look at the balloons."
-      },
-      {
-            "area": "Hollywood Studios",
-            "location": "Muppet*Vision 3D — entrance lock",
-            "clue": "When entering the Muppet*Vision 3D show, look for a Hidden Mickey lock."
-      },
-      {
-            "area": "Hollywood Studios",
-            "location": "Mama Melrose’s — waiting area Dalmatian spot",
-            "clue": "In the waiting area, look for the spot on the Dalmatian."
-      },
-      {
-            "area": "Hollywood Studios",
-            "location": "Rock ’n’ Roller Coaster — lobby floor tiles",
-            "clue": "In the lobby, between the doors with marble panels before the next room, look for two sets of three small circles in the floor tiles."
-      },
-      {
-            "area": "Hollywood Studios",
-            "location": "Rock ’n’ Roller Coaster — 8th Street Kidz Band poster",
-            "clue": "In the lobby, find the 8th Street Kidz Band poster; Jesse Camp’s denim jacket has a Mickey patch in the upper left corner."
-      },
-      {
-            "area": "Hollywood Studios",
-            "location": "Rosie’s All-American Café — welding torch gauges",
-            "clue": "In the order area, look for a Mickey head shape in the gauges of a welding torch."
-      },
-      {
-            "area": "Hollywood Studios",
-            "location": "Sci-Fi Dine-In — waiting area purple folder",
-            "clue": "In the waiting area, look on the purple folder on the bulletin board."
-      },
-      {
-            "area": "Hollywood Studios",
-            "location": "Sci-Fi Dine-In — sculpted tree branches",
-            "clue": "Look at the sculpted branches in the tree to the left rear of the screen above the kitchen area."
-      },
-      {
-            "area": "Hollywood Studios",
-            "location": "Stage 1 Company Store — shorts on clothesline",
-            "clue": "Look for a pair of shorts hanging from the clothesline over the counter."
-      },
-      {
-            "area": "Hollywood Studios",
-            "location": "Star Tours — phone directory sign",
-            "clue": "In the queue area, look on the phone directory sign at the front."
-      },
-      {
-            "area": "Hollywood Studios",
-            "location": "Tower of Terror — main balcony designs",
-            "clue": "In the entrance area, just before you go inside, look at the main balcony designs."
-      },
-      {
-            "area": "Hollywood Studios",
-            "location": "Tower of Terror — library video elevator girl",
-            "clue": "In the library video, look for the little girl in the elevator holding a Mickey Mouse plush."
-      },
-      {
-            "area": "Hollywood Studios",
-            "location": "Tower of Terror — library sheet music",
-            "clue": "In the library, look on the sheet music."
-      },
-      {
-            "area": "Hollywood Studios",
-            "location": "Tower of Terror — boiler room water stain",
-            "clue": "In the boiler room, just after the queue splits, look for the water stain on the wall."
-      },
-      {
-            "area": "Hollywood Studios",
-            "location": "Tower of Terror — final drop doors",
-            "clue": "At the doors to the final drop, look for a Mickey in a swirl of stars."
-      },
-      {
-            "area": "Hollywood Studios",
-            "location": "Alien Swirling Saucers — Space Ranger mural",
-            "clue": "Find the Space Ranger mural on the wall and look for three buttons that form Mickey."
-      },
-      {
-            "area": "Animal Kingdom",
-            "location": "The Boneyard — wooly mammoth dig site",
-            "clue": "At the wooly mammoth dig site, look for a fan with two hardhats."
-      },
-      {
-            "area": "Animal Kingdom",
-            "location": "The Boneyard — ground-level drinking fountain",
-            "clue": "In the playground, look in the soft ground covering under the ground-level drinking fountain."
-      },
-      {
-            "area": "Animal Kingdom",
-            "location": "Chester & Hester’s Dinosaur Treasures — cement dinosaur sculpture",
-            "clue": "On the Mr. Imagination cement dinosaur just outside the store, look on the right side of the dinosaur’s neck for a gold Steamboat Willie pin."
-      },
-      {
-            "area": "Animal Kingdom",
-            "location": "Chester & Hester’s Dino-Rama sign — near TriceraTop Spin",
-            "clue": "Stand beneath the sign with two large dinosaurs holding it up and look at the dinosaur’s wrist."
-      },
-      {
-            "area": "Animal Kingdom",
-            "location": "Conservation Station — neonatal care green room",
-            "clue": "In the Neonatal Care section, look on the back wall of the green room for a flower to the left of the blue koala."
-      },
-      {
-            "area": "Animal Kingdom",
-            "location": "Conservation Station — neonatal care pink room",
-            "clue": "In the Neonatal Care section, look on the back wall of the pink room in the bubbles near the ceiling."
-      },
-      {
-            "area": "Animal Kingdom",
-            "location": "Conservation Station — neonatal care blue sky",
-            "clue": "In the Neonatal Care section, look for Mickey-shaped white fluffy clouds in the light blue sky."
-      },
-      {
-            "area": "Animal Kingdom",
-            "location": "Song of the Rainforest — cockroach in queue",
-            "clue": "In the queue waiting area, look on the back of a cockroach."
-      },
-      {
-            "area": "Animal Kingdom",
-            "location": "DINOSAUR — entrance wildlife mural tree bark",
-            "clue": "At the building entrance, in the wall mural of Florida’s Cretaceous-era wildlife, look on the bark of the painted tree in the far left background."
-      },
-      {
-            "area": "Animal Kingdom",
-            "location": "DINOSAUR — entrance mural water lilies",
-            "clue": "Under the entrance wall mural, look for three floating water lilies."
-      },
-      {
-            "area": "Animal Kingdom",
-            "location": "DINOSAUR — photo pickup Carnotaurus mural",
-            "clue": "At photo imaging pickup, in the Carnotaurus wall mural, look in a shadow under a fold in the dinosaur’s lower jaw."
-      },
-      {
-            "area": "Animal Kingdom",
-            "location": "DINOSAUR — laboratory scene whiteboard",
-            "clue": "When passing the lab scene on your left, look for a blue Hidden Mickey drawn on the lower left whiteboard."
-      },
-      {
-            "area": "Animal Kingdom",
-            "location": "Cretaceous Trail — red and green picture dinosaur",
-            "clue": "At the end of the trail, look on the back of the large red-and-green picture dinosaur."
-      },
-      {
-            "area": "Animal Kingdom",
-            "location": "Harambe Village — right of Tamu Tamu Refreshments",
-            "clue": "To the right of Tamu Tamu Refreshments, look for a utility cover with pebbles in the ground forming Mickey’s ears."
-      },
-      {
-            "area": "Animal Kingdom",
-            "location": "Harambe Fruit Market — cement Mickey head",
-            "clue": "At Harambe Fruit Market, look for a section of cement poured into the shape of Mickey’s head."
-      },
-      {
-            "area": "Animal Kingdom",
-            "location": "Gorilla Falls Exploration Trail — naked mole rat building display case",
-            "clue": "In the naked mole rat building, look in the reflection of lights in the central display case near the wall."
-      },
-      {
-            "area": "Animal Kingdom",
-            "location": "Gorilla Falls Exploration Trail — Asepso box",
-            "clue": "In the naked mole rat building, look on the Asepso box on the desk to the right of the entrance."
-      },
-      {
-            "area": "Animal Kingdom",
-            "location": "Gorilla Falls Exploration Trail — backpack corner",
-            "clue": "In the naked mole rat building, look on a backpack in the far left-hand corner of the room."
-      },
-      {
-            "area": "Animal Kingdom",
-            "location": "Maharajah Jungle Trek — first archway near tiger exhibit",
-            "clue": "Inside the first archway near the tiger exhibit, look at the mural on the left for three leaves forming Mickey."
-      },
-      {
-            "area": "Animal Kingdom",
-            "location": "Maharajah Jungle Trek — mural past second arch",
-            "clue": "In the mural past the second arch, look in the cloud for the Hidden Mickey."
-      },
-      {
-            "area": "Animal Kingdom",
-            "location": "It’s Tough to Be a Bug — underground room far entrance",
-            "clue": "When you enter the underground room, find the other entrance on the far side; look on the left wall."
-      },
-      {
-            "area": "Disney Springs",
-            "location": "Disney PhotoPass Studio — columns by counter",
-            "clue": "Near the top of the columns on both sides of the counter, look in the design."
-      },
-      {
-            "area": "Disney Springs",
-            "location": "Enzo’s Hideaway Tunnel Bar — corridor wall",
-            "clue": "Look high on the wall along the corridor to the Hideaway for a Mickey among the music notes."
-      },
-      {
-            "area": "Disney Springs",
-            "location": "Disney Springs West Side — My Disney Experience map view",
-            "clue": "On the map, Exposition Park forms Mickey: two planters under the bridge are ears, the larger right tree is the eye, the larger left tree is the nose, and the curved planter is the smile."
-      },
-      {
-            "area": "Walt Disney World roadways",
-            "location": "EPCOT Toll Plaza approach from World Drive — solar farm",
-            "clue": "Before entering the EPCOT Toll Plaza from World Drive, the solar panel field forms a Hidden Mickey visible from above."
-      },
-      {
-            "area": "Disney’s Grand Floridian Resort & Spa",
-            "location": "Lobby ceiling",
-            "clue": "Look up at the ceiling in the lobby for a Hidden Mickey."
+            "land": "World Nature",
+            "attraction": "Living with the Land",
+            "location": "Loading mural lower area",
+            "clue": "Look for three circles near the lower part of the mural across from loading."
       },
       {
             "area": "EPCOT",
-            "location": "The Living Seas Aquarium — Bruce shark photo room",
-            "clue": "In the room where you can take a picture with Bruce the shark, look for the Hidden Mickey in the aquarium area."
-      },
-      {
-            "area": "Magic Kingdom",
-            "location": "Mickey’s PhilharMagic — entrance waiting area",
-            "clue": "At the entrance waiting area, look for the Hidden Mickey reported there."
+            "land": "World Nature",
+            "attraction": "Living with the Land",
+            "location": "Greenhouse produce",
+            "clue": "Look for Mickey shapes in plant or produce arrangements.",
+            "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Epcot%20-%20Mickey%20pumpkins%20by%20pgoings.jpg",
+            "photoCredit": "Photo: Paul Goings / pgoings, Wikimedia Commons",
+            "licenseText": "CC BY 2.0",
+            "licenseUrl": "https://commons.wikimedia.org/wiki/File:Epcot_-_Mickey_pumpkins_by_pgoings.jpg"
       },
       {
             "area": "EPCOT",
-            "location": "United States Pavilion — Westward Ho! painting",
-            "clue": "Inside the United States Pavilion, look at the ‘Westward Ho!’ painting by Jack Mart Smith."
+            "land": "World Nature",
+            "attraction": "Living with the Land",
+            "location": "Aquaculture/greenhouse tubing",
+            "clue": "Scan tubing and circular equipment as the boat moves through."
+      },
+      {
+            "area": "EPCOT",
+            "land": "World Nature",
+            "attraction": "Soarin’ Around the World",
+            "location": "Queue aviation displays",
+            "clue": "Look at display graphics, maps, and round design elements."
+      },
+      {
+            "area": "EPCOT",
+            "land": "World Nature",
+            "attraction": "The Seas with Nemo & Friends",
+            "location": "Queue murals",
+            "clue": "Search ocean murals, bubbles, and fish graphics."
+      },
+      {
+            "area": "EPCOT",
+            "land": "World Nature",
+            "attraction": "The Seas with Nemo & Friends",
+            "location": "Aquarium area",
+            "clue": "Look at exhibit signs and bubble patterns after the ride."
+      },
+      {
+            "area": "EPCOT",
+            "land": "World Nature",
+            "attraction": "Turtle Talk with Crush",
+            "location": "Waiting area",
+            "clue": "Search wall graphics and aquatic patterns while waiting."
+      },
+      {
+            "area": "EPCOT",
+            "land": "World Nature",
+            "attraction": "Journey Into Imagination",
+            "location": "Lab signs",
+            "clue": "Look through lab signs, wall graphics, and props around the attraction."
+      },
+      {
+            "area": "EPCOT",
+            "land": "World Nature",
+            "attraction": "ImageWorks",
+            "location": "Interactive displays",
+            "clue": "Search colorful circles and playful graphics in the post-show."
+      },
+      {
+            "area": "EPCOT",
+            "land": "World Discovery",
+            "attraction": "Guardians of the Galaxy: Cosmic Rewind",
+            "location": "Galaxarium exhibits",
+            "clue": "Search museum-style displays and cosmic graphics in the queue."
+      },
+      {
+            "area": "EPCOT",
+            "land": "World Discovery",
+            "attraction": "Guardians of the Galaxy: Cosmic Rewind",
+            "location": "Pre-show/queue panels",
+            "clue": "Look at display cases, circular symbols, and wall graphics."
+      },
+      {
+            "area": "EPCOT",
+            "land": "World Discovery",
+            "attraction": "Test Track",
+            "location": "Design Studio",
+            "clue": "Look at wheel graphics, vehicle design panels, and circular displays."
+      },
+      {
+            "area": "EPCOT",
+            "land": "World Discovery",
+            "attraction": "Test Track",
+            "location": "Queue vehicles/parts",
+            "clue": "Search car parts, tires, and display details."
+      },
+      {
+            "area": "EPCOT",
+            "land": "World Discovery",
+            "attraction": "Mission: SPACE",
+            "location": "Training area",
+            "clue": "Look at control panels, space graphics, and circular mission symbols."
+      },
+      {
+            "area": "EPCOT",
+            "land": "World Discovery",
+            "attraction": "Mission: SPACE",
+            "location": "Queue hallway",
+            "clue": "Search wall displays and technical diagrams."
+      },
+      {
+            "area": "EPCOT",
+            "land": "World Discovery",
+            "attraction": "Space 220 area",
+            "location": "Entrance/elevator details",
+            "clue": "Look at circular space-station designs and display graphics."
+      },
+      {
+            "area": "EPCOT",
+            "land": "World Discovery",
+            "attraction": "Test Track exterior",
+            "location": "Canopy/signage",
+            "clue": "Scan exterior design panels and wheel-like shapes."
+      },
+      {
+            "area": "EPCOT",
+            "land": "World Showcase",
+            "attraction": "Mexico Pavilion",
+            "location": "Marketplace",
+            "clue": "Look at murals, decorations, and marketplace props inside the pyramid."
+      },
+      {
+            "area": "EPCOT",
+            "land": "World Showcase",
+            "attraction": "Mexico Pavilion",
+            "location": "Gran Fiesta Tour",
+            "clue": "Scan boat ride scenes and background props."
+      },
+      {
+            "area": "EPCOT",
+            "land": "World Showcase",
+            "attraction": "Norway Pavilion",
+            "location": "Frozen Ever After queue",
+            "clue": "Look at woodwork, village details, and wall patterns."
+      },
+      {
+            "area": "EPCOT",
+            "land": "World Showcase",
+            "attraction": "China Pavilion",
+            "location": "Temple/garden",
+            "clue": "Study railings, stonework, artwork, and decorative motifs."
+      },
+      {
+            "area": "EPCOT",
+            "land": "World Showcase",
+            "attraction": "Germany Pavilion",
+            "location": "Clock/decor displays",
+            "clue": "Look near clocks, armor, carved details, and shop décor."
+      },
+      {
+            "area": "EPCOT",
+            "land": "World Showcase",
+            "attraction": "Italy Pavilion",
+            "location": "Fountain/stonework",
+            "clue": "Search stonework, decorative trim, and shop displays."
+      },
+      {
+            "area": "EPCOT",
+            "land": "World Showcase",
+            "attraction": "American Adventure",
+            "location": "Rotunda/lobby",
+            "clue": "Look at floor patterns, architectural trim, and historical displays."
+      },
+      {
+            "area": "EPCOT",
+            "land": "World Showcase",
+            "attraction": "Japan Pavilion",
+            "location": "Mitsukoshi store",
+            "clue": "Search displays, signs, lanterns, and garden stones."
+      },
+      {
+            "area": "EPCOT",
+            "land": "World Showcase",
+            "attraction": "Morocco Pavilion",
+            "location": "Tilework/marketplace",
+            "clue": "Look at tile patterns, arches, lanterns, and market details.",
+            "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/HiddenMickeyEpcot.JPG",
+            "photoCredit": "Photo: UpstateNYer / Matt H. Wade, Wikimedia Commons",
+            "licenseText": "Wikimedia Commons file page",
+            "licenseUrl": "https://commons.wikimedia.org/wiki/File:HiddenMickeyEpcot.JPG"
+      },
+      {
+            "area": "EPCOT",
+            "land": "World Showcase",
+            "attraction": "France Pavilion",
+            "location": "Remy’s Ratatouille Adventure queue",
+            "clue": "Search Paris street details, signs, and food-themed props."
+      },
+      {
+            "area": "EPCOT",
+            "land": "World Showcase",
+            "attraction": "United Kingdom Pavilion",
+            "location": "Shop windows/gardens",
+            "clue": "Look through window displays, garden details, and shop props."
+      },
+      {
+            "area": "EPCOT",
+            "land": "World Showcase",
+            "attraction": "Canada Pavilion",
+            "location": "Rockwork/garden paths",
+            "clue": "Study stonework, railings, and landscaping details."
+      },
+      {
+            "area": "EPCOT",
+            "land": "World Showcase",
+            "attraction": "FriendShip Launch areas",
+            "location": "Life vest signs/dock details",
+            "clue": "Check signs and dock details around the FriendShip launch areas."
+      },
+      {
+            "area": "EPCOT",
+            "land": "World Showcase",
+            "attraction": "Refreshment Port",
+            "location": "Counter/signage",
+            "clue": "Look around signs and nearby circular design details."
+      },
+      {
+            "area": "EPCOT",
+            "land": "World Showcase",
+            "attraction": "International Gateway",
+            "location": "Entrance area",
+            "clue": "Search pavement, planters, and sign designs near the EPCOT resort entrance."
+      },
+      {
+            "area": "EPCOT",
+            "land": "World Showcase",
+            "attraction": "France bridge area",
+            "location": "Railings and festival décor",
+            "clue": "Look at bridge railings and temporary festival displays."
+      },
+      {
+            "area": "EPCOT",
+            "land": "World Showcase",
+            "attraction": "Japan gardens",
+            "location": "Lanterns/stones",
+            "clue": "Scan lanterns, stones, and garden patterns."
+      },
+      {
+            "area": "EPCOT",
+            "land": "World Showcase",
+            "attraction": "UK garden maze/paths",
+            "location": "Garden details",
+            "clue": "Look at garden path designs, signs, and decorative trim."
+      },
+      {
+            "area": "EPCOT",
+            "land": "World Showcase",
+            "attraction": "Canada waterfall path",
+            "location": "Rockwork",
+            "clue": "Search the rockwork and railing details."
+      },
+      {
+            "area": "EPCOT",
+            "land": "World Showcase",
+            "attraction": "World Showcase Lagoon railings",
+            "location": "Railing details",
+            "clue": "Look along railings and lighting fixtures around the lagoon."
+      },
+      {
+            "area": "EPCOT",
+            "land": "World Showcase",
+            "attraction": "Italy Pavilion",
+            "location": "Shop displays",
+            "clue": "Look for circular details around the shop displays and decorative objects."
+      },
+      {
+            "area": "EPCOT",
+            "land": "World Showcase",
+            "attraction": "Germany Pavilion",
+            "location": "Miniature village area",
+            "clue": "Search small display details and round architectural elements."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Hollywood Boulevard / Echo Lake",
+            "attraction": "Park entrance gates",
+            "location": "Metal gate designs",
+            "clue": "Look at the metal entrance gate patterns for Mickey-like shapes."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Hollywood Boulevard / Echo Lake",
+            "attraction": "Crossroads of the World",
+            "location": "Globe above the shop",
+            "clue": "Look up around the globe/Crossroads structure."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Hollywood Boulevard / Echo Lake",
+            "attraction": "Mickey & Minnie’s Runaway Railway",
+            "location": "Queue posters",
+            "clue": "Search cartoon posters and queue details."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Hollywood Boulevard / Echo Lake",
+            "attraction": "Mickey & Minnie’s Runaway Railway",
+            "location": "Pre-show/ride scenes",
+            "clue": "Look through cartoon scenes and background gags."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Hollywood Boulevard / Echo Lake",
+            "attraction": "Walt Disney Presents",
+            "location": "Historical displays",
+            "clue": "Look at photos, models, signs, and display details."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Hollywood Boulevard / Echo Lake",
+            "attraction": "Hollywood Brown Derby",
+            "location": "Dining room décor",
+            "clue": "Search wall art, plates, and restaurant details."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Hollywood Boulevard / Echo Lake",
+            "attraction": "Echo Lake",
+            "location": "Boat/signs",
+            "clue": "Look around the lake, boat details, and signs."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Hollywood Boulevard / Echo Lake",
+            "attraction": "50’s Prime Time Café",
+            "location": "Kitchen props",
+            "clue": "Look at wallpaper, plates, kitchen props, and retro décor."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Hollywood Boulevard / Echo Lake",
+            "attraction": "Indiana Jones Epic Stunt Spectacular",
+            "location": "Queue/theater set",
+            "clue": "Look at crates, stonework, and expedition details."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Hollywood Boulevard / Echo Lake",
+            "attraction": "Star Tours",
+            "location": "Queue droids/panels",
+            "clue": "Search droid details, spaceport signs, control panels, and luggage props."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Sunset Boulevard",
+            "attraction": "Tower of Terror",
+            "location": "Lobby props",
+            "clue": "Search dusty props, lamps, hotel décor, and library details."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Sunset Boulevard",
+            "attraction": "Tower of Terror",
+            "location": "Library sheet music",
+            "clue": "Look around the library scene for reported Mickey shapes in sheet music/details."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Sunset Boulevard",
+            "attraction": "Tower of Terror",
+            "location": "Boiler room water stain",
+            "clue": "Look for a reported water stain Mickey after the queue splits in the boiler room."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Sunset Boulevard",
+            "attraction": "Tower of Terror",
+            "location": "Final drop door stars",
+            "clue": "Look for a swirl of stars near the final drop doors."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Sunset Boulevard",
+            "attraction": "Rock ’n’ Roller Coaster",
+            "location": "Recording studio queue",
+            "clue": "Look at studio props, posters, instruments, and wall art."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Sunset Boulevard",
+            "attraction": "Rock ’n’ Roller Coaster",
+            "location": "Backstage alley area",
+            "clue": "Search signs, cables, and backstage details."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Sunset Boulevard",
+            "attraction": "Lightning McQueen’s Racing Academy area",
+            "location": "Racing graphics",
+            "clue": "Look at wheels, signs, and round racing designs."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Sunset Boulevard",
+            "attraction": "Sunset Boulevard shop windows",
+            "location": "Window displays",
+            "clue": "Study window displays, posters, lighting, and circular details."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Sunset Boulevard",
+            "attraction": "Fantasmic! theater",
+            "location": "Entry/seating signs",
+            "clue": "Look around signs, railings, and seating-section details."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Sunset Boulevard",
+            "attraction": "Beauty and the Beast theater area",
+            "location": "Theater signage",
+            "clue": "Search signs, railings, and decorative trim near the theater."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Toy Story Land",
+            "attraction": "Toy Story Mania",
+            "location": "Oversized toys",
+            "clue": "Look around game boards, cards, crayons, and colorful props."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Toy Story Land",
+            "attraction": "Toy Story Mania",
+            "location": "Queue game pieces",
+            "clue": "Search board-game pieces and circular designs."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Toy Story Land",
+            "attraction": "Slinky Dog Dash",
+            "location": "Queue toy boxes",
+            "clue": "Look at oversized toy boxes, drawings, and coaster details."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Toy Story Land",
+            "attraction": "Slinky Dog Dash",
+            "location": "Launch/track details",
+            "clue": "Scan fence decorations and toy-like props near the track."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Toy Story Land",
+            "attraction": "Alien Swirling Saucers",
+            "location": "Alien graphics",
+            "clue": "Look at colorful alien designs and circle groupings."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Toy Story Land",
+            "attraction": "Alien Swirling Saucers",
+            "location": "Queue ceiling/signage",
+            "clue": "Search lights, signs, and toy patterns."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Toy Story Land",
+            "attraction": "Toy Story Land entrance",
+            "location": "Andy’s drawings",
+            "clue": "Look at drawings, fence details, and toy blocks."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Toy Story Land",
+            "attraction": "Woody’s Lunch Box",
+            "location": "Counter/signage",
+            "clue": "Scan menu boards, lunch box details, and toy props."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Toy Story Land",
+            "attraction": "Toy Story Land restroom area",
+            "location": "Wall graphics",
+            "clue": "Search tile and wall graphics."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Toy Story Land",
+            "attraction": "Toy Story Land walkways",
+            "location": "Ground/toy details",
+            "clue": "Look at pavement, toys, and playful decorative circles."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Galaxy’s Edge",
+            "attraction": "Millennium Falcon: Smugglers Run",
+            "location": "Queue engine room",
+            "clue": "Search ship parts, controls, and engine-room details."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Galaxy’s Edge",
+            "attraction": "Millennium Falcon: Smugglers Run",
+            "location": "Hondo area",
+            "clue": "Look at crates, panels, and circular tech details."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Galaxy’s Edge",
+            "attraction": "Rise of the Resistance",
+            "location": "Resistance base queue",
+            "clue": "Look at helmets, equipment, wall markings, and military-style props."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Galaxy’s Edge",
+            "attraction": "Rise of the Resistance",
+            "location": "Transport/Star Destroyer areas",
+            "clue": "Search panels, circular lights, and equipment details."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Galaxy’s Edge",
+            "attraction": "Droid Depot area",
+            "location": "Droid parts",
+            "clue": "Look at droid parts and round mechanical pieces."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Galaxy’s Edge",
+            "attraction": "Marketplace",
+            "location": "Shop details",
+            "clue": "Search wall panels, hanging props, and marketplace details."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Galaxy’s Edge",
+            "attraction": "Docking Bay 7",
+            "location": "Cargo details",
+            "clue": "Look at crates, machinery, wall panels, and cargo props."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Galaxy’s Edge",
+            "attraction": "Ronto Roasters",
+            "location": "Roaster/equipment",
+            "clue": "Search machinery, grill details, and circular mechanical shapes."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Galaxy’s Edge",
+            "attraction": "Milk Stand area",
+            "location": "Panels/signage",
+            "clue": "Look at signs, wall panels, and equipment pieces."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Galaxy’s Edge",
+            "attraction": "Batuu pathways",
+            "location": "Wall panels",
+            "clue": "Scan door controls, panels, and weathered tech details."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Animation Courtyard / Commissary",
+            "attraction": "Muppet*Vision 3D",
+            "location": "Courtyard signs",
+            "clue": "Look at signs, posters, silly props, and background jokes near the theater."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Animation Courtyard / Commissary",
+            "attraction": "Muppet*Vision 3D",
+            "location": "Pre-show area",
+            "clue": "Search props, boxes, and wall details."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Animation Courtyard / Commissary",
+            "attraction": "Animation Courtyard",
+            "location": "Banners/wall graphics",
+            "clue": "Search banners, signs, and wall graphics."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Animation Courtyard / Commissary",
+            "attraction": "Disney Junior area",
+            "location": "Bright set pieces",
+            "clue": "Look around colorful shapes and kid-friendly graphics."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Animation Courtyard / Commissary",
+            "attraction": "Commissary Lane",
+            "location": "Restaurant signs",
+            "clue": "Search signs, windows, and decorative trim."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Animation Courtyard / Commissary",
+            "attraction": "Sci-Fi Dine-In",
+            "location": "Car/movie details",
+            "clue": "Look at car details, movie posters, stars, and theater props."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Animation Courtyard / Commissary",
+            "attraction": "ABC Commissary",
+            "location": "Dining area graphics",
+            "clue": "Search wall graphics and decorative circles."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Animation Courtyard / Commissary",
+            "attraction": "Grand Avenue",
+            "location": "Brick/sign details",
+            "clue": "Look at signage, brickwork, and window displays."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Animation Courtyard / Commissary",
+            "attraction": "BaseLine Tap House area",
+            "location": "Industrial details",
+            "clue": "Search signs, lights, and round design elements."
+      },
+      {
+            "area": "Hollywood Studios",
+            "land": "Animation Courtyard / Commissary",
+            "attraction": "Vacation Fun theater area",
+            "location": "Poster/display details",
+            "clue": "Look at posters and character-inspired design elements."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Discovery Island",
+            "attraction": "Tree of Life",
+            "location": "Animal carvings",
+            "clue": "Look closely at the carvings for Mickey-like shapes hidden within animal designs.",
+            "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Animal%20Kingdom%20banner%20Tree%20of%20Life.jpg",
+            "photoCredit": "Photo: Vox Efx, Wikimedia Commons",
+            "licenseText": "CC BY 2.0",
+            "licenseUrl": "https://commons.wikimedia.org/wiki/File:Animal_Kingdom_banner_Tree_of_Life.jpg"
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Discovery Island",
+            "attraction": "Tree of Life",
+            "location": "Roots/trails",
+            "clue": "Search roots, carvings, and trail details near the base.",
+            "imageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Animal%20Kingdom%20banner%20Tree%20of%20Life.jpg",
+            "photoCredit": "Photo: Vox Efx, Wikimedia Commons",
+            "licenseText": "CC BY 2.0",
+            "licenseUrl": "https://commons.wikimedia.org/wiki/File:Animal_Kingdom_banner_Tree_of_Life.jpg"
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Discovery Island",
+            "attraction": "It’s Tough to Be a Bug theater area",
+            "location": "Posters/root details",
+            "clue": "Look around roots, posters, and theater approach details."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Discovery Island",
+            "attraction": "Discovery Island trails",
+            "location": "Trail signs",
+            "clue": "Search carved details, landscaping, and signs around the trails."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Discovery Island",
+            "attraction": "Flame Tree Barbecue",
+            "location": "Seating pavilions",
+            "clue": "Look at covered pavilions, carved animals, and sign details."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Discovery Island",
+            "attraction": "Island Mercantile area",
+            "location": "Shop displays",
+            "clue": "Search merchandise displays and wall graphics."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Discovery Island",
+            "attraction": "Discovery Trading Company",
+            "location": "Display details",
+            "clue": "Look at circular props and shop décor."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Discovery Island",
+            "attraction": "Adventurers Outpost area",
+            "location": "Queue/meet details",
+            "clue": "Search signs, props, and wall patterns."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Discovery Island",
+            "attraction": "Tree of Life Garden paths",
+            "location": "Rockwork/railings",
+            "clue": "Look along rockwork and railings near the paths."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Discovery Island",
+            "attraction": "Discovery Island bridge views",
+            "location": "Bridge details",
+            "clue": "Scan railings and signs while crossing bridges."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Africa",
+            "attraction": "Kilimanjaro Safaris",
+            "location": "Queue signs",
+            "clue": "Look at queue signs, maps, and Harambe Wildlife Reserve details."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Africa",
+            "attraction": "Kilimanjaro Safaris",
+            "location": "Safari vehicle route",
+            "clue": "Look quickly at signs, rockwork, and themed props while moving."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Africa",
+            "attraction": "Harambe Market",
+            "location": "Murals/signs",
+            "clue": "Search murals, posters, crates, and market details."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Africa",
+            "attraction": "Festival of the Lion King",
+            "location": "Theater decorations",
+            "clue": "Look at colorful signs, theater trim, and patterned artwork."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Africa",
+            "attraction": "Gorilla Falls Exploration Trail",
+            "location": "Trail signs",
+            "clue": "Look at educational displays, signs, and habitat details."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Africa",
+            "attraction": "Gorilla Falls Exploration Trail",
+            "location": "Research station details",
+            "clue": "Search maps, posters, and round display elements."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Africa",
+            "attraction": "Harambe Village",
+            "location": "Building signs",
+            "clue": "Look at weathered signs and painted wall details."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Africa",
+            "attraction": "Wildlife Express Train",
+            "location": "Station details",
+            "clue": "Search train station signs, railings, and graphics."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Africa",
+            "attraction": "Conservation Station",
+            "location": "Educational displays",
+            "clue": "Look through animal-care displays and wall graphics."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Africa",
+            "attraction": "Rafiki’s Planet Watch",
+            "location": "Station/graphics",
+            "clue": "Search signs, railings, and display details."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Asia",
+            "attraction": "Expedition Everest",
+            "location": "Queue museum",
+            "clue": "Search expedition gear, display cases, posters, and wall details."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Asia",
+            "attraction": "Expedition Everest",
+            "location": "Tea train/boarding area",
+            "clue": "Look at luggage, signs, and boarding-area props."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Asia",
+            "attraction": "Expedition Everest",
+            "location": "Mountain/track views",
+            "clue": "Scan rockwork and set pieces while moving."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Asia",
+            "attraction": "Kali River Rapids",
+            "location": "Queue carved wood",
+            "clue": "Search signs, carved wood, equipment, and environmental details."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Asia",
+            "attraction": "Kali River Rapids",
+            "location": "Temple/shrine details",
+            "clue": "Look at wall patterns, statues, and queue props."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Asia",
+            "attraction": "Maharajah Jungle Trek",
+            "location": "First archway mural",
+            "clue": "Look for three-leaf/circle shapes inside the first archway near the tiger exhibit."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Asia",
+            "attraction": "Maharajah Jungle Trek",
+            "location": "Cloud past second arch",
+            "clue": "Look for a Mickey-like cloud past the second arch area."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Asia",
+            "attraction": "Maharajah Jungle Trek",
+            "location": "Tiger viewing details",
+            "clue": "Search murals, stonework, and habitat signs."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Asia",
+            "attraction": "Yak & Yeti area",
+            "location": "Restaurant décor",
+            "clue": "Look at wall art, statues, and patterned details."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Asia",
+            "attraction": "Asia marketplace",
+            "location": "Lanterns/signs",
+            "clue": "Search signs, lanterns, painted details, and props."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Pandora",
+            "attraction": "Avatar Flight of Passage",
+            "location": "Cave drawings",
+            "clue": "Look at cave drawings, natural textures, and wall markings in the queue."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Pandora",
+            "attraction": "Avatar Flight of Passage",
+            "location": "Lab equipment",
+            "clue": "Search lab equipment, circular details, and display graphics."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Pandora",
+            "attraction": "Avatar Flight of Passage",
+            "location": "Link chamber area",
+            "clue": "Look at panels, lights, and round technology details."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Pandora",
+            "attraction": "Na’vi River Journey",
+            "location": "Queue woven details",
+            "clue": "Search woven textures, lanterns, and layered scenic elements."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Pandora",
+            "attraction": "Na’vi River Journey",
+            "location": "Ride scenes",
+            "clue": "Look carefully at plants, glowing details, and background shapes."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Pandora",
+            "attraction": "Pandora pathways",
+            "location": "Bioluminescent plants",
+            "clue": "Look at plant groupings and rock details after dark if possible."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Pandora",
+            "attraction": "Satu’li Canteen",
+            "location": "Dining hall details",
+            "clue": "Search wall art, signs, and seating-area décor."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Pandora",
+            "attraction": "Windtraders",
+            "location": "Shop displays",
+            "clue": "Look at merchandise displays, wall art, and circular design elements."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Pandora",
+            "attraction": "Pongu Pongu area",
+            "location": "Counter/signage",
+            "clue": "Search signs and themed details around the drink stand."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "Pandora",
+            "attraction": "Valley of Mo’ara",
+            "location": "Rockwork/water features",
+            "clue": "Scan rockwork, pathways, and water-feature details."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "DinoLand / Theater",
+            "attraction": "DINOSAUR",
+            "location": "Lower-left whiteboard",
+            "clue": "Look for a blue Mickey drawn on the lower-left whiteboard in the lab scene."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "DinoLand / Theater",
+            "attraction": "DINOSAUR",
+            "location": "Queue lab displays",
+            "clue": "Look through fossils, signs, and equipment in the queue."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "DinoLand / Theater",
+            "attraction": "DINOSAUR",
+            "location": "Ride mural/details",
+            "clue": "Search the dinosaur murals and background props."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "DinoLand / Theater",
+            "attraction": "Boneyard",
+            "location": "Hard hats/fan area",
+            "clue": "Look around hard hats and fan/utility details in the play area."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "DinoLand / Theater",
+            "attraction": "Boneyard",
+            "location": "Dig site props",
+            "clue": "Search fossils, buckets, and round shapes in the dig area."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "DinoLand / Theater",
+            "attraction": "Dino-Rama sign area",
+            "location": "Dinosaur wrist/detail",
+            "clue": "Look at the dinosaur/sign artwork for reported Mickey shapes."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "DinoLand / Theater",
+            "attraction": "Restaurantosaurus",
+            "location": "Dining rooms",
+            "clue": "Search dorm-style décor, posters, and props."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "DinoLand / Theater",
+            "attraction": "Finding Nemo theater area",
+            "location": "Ocean graphics",
+            "clue": "Look at signs, wall patterns, and ocean-themed details."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "DinoLand / Theater",
+            "attraction": "Theater in the Wild approach",
+            "location": "Path signs",
+            "clue": "Search approach signs and railings near the theater."
+      },
+      {
+            "area": "Animal Kingdom",
+            "land": "DinoLand / Theater",
+            "attraction": "DinoLand walkway",
+            "location": "Carnival/game details",
+            "clue": "Look at signs, booths, fencing, and colorful circle groupings."
       }
 ];
     const disneyTrivia = [
@@ -1330,80 +2340,800 @@
             "answer": "1971."
       },
       {
-            "question": "Which park has Spaceship Earth?",
-            "answer": "EPCOT."
+            "question": "Which Walt Disney World park opened first?",
+            "answer": "Magic Kingdom."
       },
       {
-            "question": "Which park has the Tree of Life?",
+            "question": "Which EPCOT icon is a geodesic sphere?",
+            "answer": "Spaceship Earth."
+      },
+      {
+            "question": "Which park is home to the Tree of Life?",
             "answer": "Disney’s Animal Kingdom."
       },
       {
-            "question": "What is the name of the hotel with a South Pacific theme on the monorail line?",
-            "answer": "Disney’s Polynesian Village Resort."
+            "question": "Which park is home to Hollywood Boulevard?",
+            "answer": "Disney’s Hollywood Studios."
+      },
+      {
+            "question": "Which resort has a monorail track running through its main building?",
+            "answer": "Disney’s Contemporary Resort."
       },
       {
             "question": "Which Magic Kingdom land has Pirates of the Caribbean?",
             "answer": "Adventureland."
       },
       {
-            "question": "Which park is home to Star Wars: Galaxy’s Edge?",
-            "answer": "Disney’s Hollywood Studios."
+            "question": "Which Magic Kingdom land has Big Thunder Mountain Railroad?",
+            "answer": "Frontierland."
+      },
+      {
+            "question": "Which Magic Kingdom land has Space Mountain?",
+            "answer": "Tomorrowland."
+      },
+      {
+            "question": "Which Magic Kingdom land has Peter Pan’s Flight?",
+            "answer": "Fantasyland."
+      },
+      {
+            "question": "Which Magic Kingdom land has Haunted Mansion?",
+            "answer": "Liberty Square."
       },
       {
             "question": "Which Magic Kingdom attraction features 999 happy haunts?",
             "answer": "The Haunted Mansion."
       },
       {
-            "question": "What nighttime show is famous for fireworks over Cinderella Castle?",
-            "answer": "Happily Ever After."
+            "question": "Which ride has the song 'Yo Ho, Yo Ho, A Pirate’s Life for Me'?",
+            "answer": "Pirates of the Caribbean."
       },
       {
-            "question": "Which EPCOT attraction is inside the giant silver sphere?",
-            "answer": "Spaceship Earth."
+            "question": "Which Magic Kingdom attraction features singing birds and flowers?",
+            "answer": "Walt Disney’s Enchanted Tiki Room."
       },
       {
-            "question": "What is Mickey Mouse’s girlfriend’s name?",
-            "answer": "Minnie Mouse."
-      },
-      {
-            "question": "Which Disney park has Pandora – The World of Avatar?",
-            "answer": "Disney’s Animal Kingdom."
-      },
-      {
-            "question": "Which resort is known for its monorail running through the main building?",
-            "answer": "Disney’s Contemporary Resort."
-      },
-      {
-            "question": "Which Disney World park opened in 1989?",
-            "answer": "Disney’s Hollywood Studios."
-      },
-      {
-            "question": "Which Disney World park opened in 1998?",
-            "answer": "Disney’s Animal Kingdom."
-      },
-      {
-            "question": "What mountain ride is located in Frontierland?",
+            "question": "Which Magic Kingdom ride is known as the wildest ride in the wilderness?",
             "answer": "Big Thunder Mountain Railroad."
       },
       {
-            "question": "Which Disney World resort has the Grand Canyon Concourse?",
-            "answer": "Disney’s Contemporary Resort."
+            "question": "Which Magic Kingdom attraction has a moving walkway called a speed ramp?",
+            "answer": "Tomorrowland Transit Authority PeopleMover."
       },
       {
-            "question": "Which EPCOT pavilion has the Gran Fiesta Tour?",
-            "answer": "Mexico Pavilion."
+            "question": "Which Magic Kingdom attraction follows the Darling children to Never Land?",
+            "answer": "Peter Pan’s Flight."
       },
       {
-            "question": "Which park has Expedition Everest?",
-            "answer": "Disney’s Animal Kingdom."
+            "question": "Which Magic Kingdom attraction features Ariel and scenes from The Little Mermaid?",
+            "answer": "Under the Sea – Journey of The Little Mermaid."
       },
       {
-            "question": "Which Hollywood Studios attraction stars Mickey and Minnie in a cartoon world?",
+            "question": "Which Magic Kingdom attraction is based on Winnie the Pooh?",
+            "answer": "The Many Adventures of Winnie the Pooh."
+      },
+      {
+            "question": "Which Magic Kingdom ride has spinning teacups?",
+            "answer": "Mad Tea Party."
+      },
+      {
+            "question": "Which Magic Kingdom castle is the park’s central icon?",
+            "answer": "Cinderella Castle."
+      },
+      {
+            "question": "Which Magic Kingdom restaurant is themed to Beauty and the Beast?",
+            "answer": "Be Our Guest Restaurant."
+      },
+      {
+            "question": "Which Magic Kingdom land is themed to colonial America?",
+            "answer": "Liberty Square."
+      },
+      {
+            "question": "Which Magic Kingdom show features animatronic bears?",
+            "answer": "Country Bear Jamboree."
+      },
+      {
+            "question": "Which Magic Kingdom boat attraction sails around the Rivers of America?",
+            "answer": "Liberty Square Riverboat."
+      },
+      {
+            "question": "Which Magic Kingdom area has circus theming?",
+            "answer": "Storybook Circus."
+      },
+      {
+            "question": "Which Magic Kingdom ride is a slow-moving tour through Tomorrowland?",
+            "answer": "Tomorrowland Transit Authority PeopleMover."
+      },
+      {
+            "question": "Which Magic Kingdom mountain opened in 1975?",
+            "answer": "Space Mountain."
+      },
+      {
+            "question": "Which EPCOT pavilion contains Spaceship Earth?",
+            "answer": "World Celebration."
+      },
+      {
+            "question": "Which EPCOT pavilion has Soarin’ Around the World?",
+            "answer": "The Land pavilion."
+      },
+      {
+            "question": "Which EPCOT attraction takes guests through greenhouses?",
+            "answer": "Living with the Land."
+      },
+      {
+            "question": "Which EPCOT pavilion has The Seas with Nemo & Friends?",
+            "answer": "The Seas pavilion."
+      },
+      {
+            "question": "Which EPCOT ride stars Figment?",
+            "answer": "Journey Into Imagination with Figment."
+      },
+      {
+            "question": "Which EPCOT World Showcase pavilion has Gran Fiesta Tour?",
+            "answer": "Mexico."
+      },
+      {
+            "question": "Which EPCOT pavilion has Frozen Ever After?",
+            "answer": "Norway."
+      },
+      {
+            "question": "Which EPCOT pavilion has Remy’s Ratatouille Adventure?",
+            "answer": "France."
+      },
+      {
+            "question": "Which EPCOT pavilion has The American Adventure?",
+            "answer": "The American Adventure pavilion."
+      },
+      {
+            "question": "Which EPCOT pavilion has Mitsukoshi Department Store?",
+            "answer": "Japan."
+      },
+      {
+            "question": "Which EPCOT pavilion has the Biergarten Restaurant?",
+            "answer": "Germany."
+      },
+      {
+            "question": "Which EPCOT pavilion has Le Cellier Steakhouse?",
+            "answer": "Canada."
+      },
+      {
+            "question": "Which EPCOT pavilion is home to Rose & Crown?",
+            "answer": "United Kingdom."
+      },
+      {
+            "question": "Which EPCOT pavilion has San Angel Inn?",
+            "answer": "Mexico."
+      },
+      {
+            "question": "Which EPCOT attraction replaced Ellen’s Energy Adventure?",
+            "answer": "Guardians of the Galaxy: Cosmic Rewind."
+      },
+      {
+            "question": "Which EPCOT ride lets guests design a virtual vehicle?",
+            "answer": "Test Track."
+      },
+      {
+            "question": "Which EPCOT nighttime lagoon is surrounded by World Showcase?",
+            "answer": "World Showcase Lagoon."
+      },
+      {
+            "question": "Which EPCOT festival usually features outdoor kitchens and topiaries in spring?",
+            "answer": "EPCOT International Flower & Garden Festival."
+      },
+      {
+            "question": "Which EPCOT spring festival has Garden Rocks concerts?",
+            "answer": "EPCOT International Flower & Garden Festival."
+      },
+      {
+            "question": "Which EPCOT festival is most associated with Frushi?",
+            "answer": "Flower & Garden Festival."
+      },
+      {
+            "question": "Which EPCOT drink is a classic Flower & Garden favorite at Pineapple Promenade?",
+            "answer": "Frozen Desert Violet Lemonade."
+      },
+      {
+            "question": "Which EPCOT country pavilion has maple popcorn?",
+            "answer": "Canada Pavilion."
+      },
+      {
+            "question": "Which EPCOT country pavilion has a replica of the Eiffel Tower?",
+            "answer": "France."
+      },
+      {
+            "question": "Which EPCOT country pavilion has a large indoor pyramid?",
+            "answer": "Mexico."
+      },
+      {
+            "question": "Which EPCOT country pavilion has a stave church-style building?",
+            "answer": "Norway."
+      },
+      {
+            "question": "Which EPCOT country pavilion has a pagoda?",
+            "answer": "Japan."
+      },
+      {
+            "question": "Which EPCOT country pavilion has a tea garden?",
+            "answer": "United Kingdom."
+      },
+      {
+            "question": "Which EPCOT country pavilion has Victoria Gardens?",
+            "answer": "Canada."
+      },
+      {
+            "question": "Which EPCOT country pavilion has a biergarten theme?",
+            "answer": "Germany."
+      },
+      {
+            "question": "Which EPCOT country pavilion has gondola-style theming?",
+            "answer": "Italy."
+      },
+      {
+            "question": "Which EPCOT country pavilion has the American Adventure show?",
+            "answer": "The American Adventure."
+      },
+      {
+            "question": "Which Hollywood Studios ride is inside the Chinese Theatre?",
             "answer": "Mickey & Minnie’s Runaway Railway."
       },
       {
-            "question": "Which Magic Kingdom ride features the song 'Yo Ho'?",
+            "question": "Which Hollywood Studios land is themed to Andy’s backyard?",
+            "answer": "Toy Story Land."
+      },
+      {
+            "question": "Which Hollywood Studios attraction has a 13-story haunted hotel theme?",
+            "answer": "The Twilight Zone Tower of Terror."
+      },
+      {
+            "question": "Which Hollywood Studios coaster features Aerosmith?",
+            "answer": "Rock ’n’ Roller Coaster."
+      },
+      {
+            "question": "Which Hollywood Studios land contains Millennium Falcon: Smugglers Run?",
+            "answer": "Star Wars: Galaxy’s Edge."
+      },
+      {
+            "question": "Which Hollywood Studios attraction includes a First Order Star Destroyer?",
+            "answer": "Star Wars: Rise of the Resistance."
+      },
+      {
+            "question": "Which Hollywood Studios attraction is a 3D shooting game with Toy Story characters?",
+            "answer": "Toy Story Mania."
+      },
+      {
+            "question": "Which Hollywood Studios ride features Slinky Dog?",
+            "answer": "Slinky Dog Dash."
+      },
+      {
+            "question": "Which Hollywood Studios attraction has alien-themed spinning ride vehicles?",
+            "answer": "Alien Swirling Saucers."
+      },
+      {
+            "question": "Which Hollywood Studios show stars Indiana Jones-style stunt scenes?",
+            "answer": "Indiana Jones Epic Stunt Spectacular."
+      },
+      {
+            "question": "Which Hollywood Studios theater show features Muppets?",
+            "answer": "Muppet*Vision 3D."
+      },
+      {
+            "question": "Which Hollywood Studios restaurant is themed like a 1950s drive-in movie theater?",
+            "answer": "Sci-Fi Dine-In Theater Restaurant."
+      },
+      {
+            "question": "Which Hollywood Studios restaurant is themed like a 1950s family kitchen?",
+            "answer": "50’s Prime Time Café."
+      },
+      {
+            "question": "Which Hollywood Studios street is the park’s entrance boulevard?",
+            "answer": "Hollywood Boulevard."
+      },
+      {
+            "question": "Which Hollywood Studios area leads toward Tower of Terror?",
+            "answer": "Sunset Boulevard."
+      },
+      {
+            "question": "Which Hollywood Studios land opened in 2019 and is set on Batuu?",
+            "answer": "Star Wars: Galaxy’s Edge."
+      },
+      {
+            "question": "Which Hollywood Studios attraction replaced The Great Movie Ride?",
+            "answer": "Mickey & Minnie’s Runaway Railway."
+      },
+      {
+            "question": "Which Hollywood Studios ride features Goofy as the train engineer?",
+            "answer": "Mickey & Minnie’s Runaway Railway."
+      },
+      {
+            "question": "Which Animal Kingdom attraction is built around a giant carved tree?",
+            "answer": "The Tree of Life."
+      },
+      {
+            "question": "Which Animal Kingdom ride takes guests on a safari through Harambe Wildlife Reserve?",
+            "answer": "Kilimanjaro Safaris."
+      },
+      {
+            "question": "Which Animal Kingdom coaster is themed to the Himalayas?",
+            "answer": "Expedition Everest."
+      },
+      {
+            "question": "Which Animal Kingdom land contains Pandora?",
+            "answer": "Pandora – The World of Avatar."
+      },
+      {
+            "question": "Which Animal Kingdom ride simulates flying on a banshee?",
+            "answer": "Avatar Flight of Passage."
+      },
+      {
+            "question": "Which Animal Kingdom boat ride is set in Pandora?",
+            "answer": "Na’vi River Journey."
+      },
+      {
+            "question": "Which Animal Kingdom attraction sends guests back in time to rescue an iguanodon?",
+            "answer": "DINOSAUR."
+      },
+      {
+            "question": "Which Animal Kingdom water ride is in Asia?",
+            "answer": "Kali River Rapids."
+      },
+      {
+            "question": "Which Animal Kingdom walking trail features tigers?",
+            "answer": "Maharajah Jungle Trek."
+      },
+      {
+            "question": "Which Animal Kingdom walking trail features gorillas?",
+            "answer": "Gorilla Falls Exploration Trail."
+      },
+      {
+            "question": "Which Animal Kingdom show features music from The Lion King?",
+            "answer": "Festival of the Lion King."
+      },
+      {
+            "question": "Which Animal Kingdom show is based on Finding Nemo?",
+            "answer": "Finding Nemo: The Big Blue… and Beyond!"
+      },
+      {
+            "question": "Which Animal Kingdom area is themed to Africa?",
+            "answer": "Harambe."
+      },
+      {
+            "question": "Which Animal Kingdom area is themed to Asia?",
+            "answer": "Asia."
+      },
+      {
+            "question": "Which Disney park opened on Earth Day in 1998?",
+            "answer": "Disney’s Animal Kingdom."
+      },
+      {
+            "question": "Which Animal Kingdom restaurant is known for ribs and outdoor seating near Discovery Island?",
+            "answer": "Flame Tree Barbecue."
+      },
+      {
+            "question": "Which Animal Kingdom ride has a Yeti figure?",
+            "answer": "Expedition Everest."
+      },
+      {
+            "question": "Which Disney resort is themed to the South Pacific?",
+            "answer": "Disney’s Polynesian Village Resort."
+      },
+      {
+            "question": "Which Disney resort has the Grand Canyon Concourse?",
+            "answer": "Disney’s Contemporary Resort."
+      },
+      {
+            "question": "Which Disney resort is known for Victorian theming near Magic Kingdom?",
+            "answer": "Disney’s Grand Floridian Resort & Spa."
+      },
+      {
+            "question": "Which Disney resort is themed to the Pacific Northwest?",
+            "answer": "Disney’s Wilderness Lodge."
+      },
+      {
+            "question": "Which Disney resort is themed to the Atlantic seaside?",
+            "answer": "Disney’s Beach Club Resort."
+      },
+      {
+            "question": "Which Disney resort is paired with Beach Club near EPCOT?",
+            "answer": "Disney’s Yacht Club Resort."
+      },
+      {
+            "question": "Which Disney resort is themed to turn-of-the-century Atlantic City entertainment?",
+            "answer": "Disney’s BoardWalk Inn."
+      },
+      {
+            "question": "Which Disney resort has large animation-themed sections?",
+            "answer": "Disney’s Art of Animation Resort."
+      },
+      {
+            "question": "Which Disney resort celebrates decades of pop culture?",
+            "answer": "Disney’s Pop Century Resort."
+      },
+      {
+            "question": "Which Disney resort has a Spanish/Mexican/Southwestern theme?",
+            "answer": "Disney’s Coronado Springs Resort."
+      },
+      {
+            "question": "Which Disney resort is split into Riverside and French Quarter?",
+            "answer": "Disney’s Port Orleans Resort."
+      },
+      {
+            "question": "Which Disney resort has savanna views with animals?",
+            "answer": "Disney’s Animal Kingdom Lodge."
+      },
+      {
+            "question": "Which Disney resort is inspired by the European Riviera?",
+            "answer": "Disney’s Riviera Resort."
+      },
+      {
+            "question": "Which Disney Springs store is the large Disney merchandise store?",
+            "answer": "World of Disney."
+      },
+      {
+            "question": "Which transportation system connects Magic Kingdom with nearby monorail resorts?",
+            "answer": "The Walt Disney World Monorail."
+      },
+      {
+            "question": "Which boats connect parts of EPCOT and Hollywood Studios resort area?",
+            "answer": "FriendShip Boats."
+      },
+      {
+            "question": "Which aerial gondola system serves EPCOT and Hollywood Studios area resorts?",
+            "answer": "Disney Skyliner."
+      },
+      {
+            "question": "Which water park has a snowy ski resort theme?",
+            "answer": "Blizzard Beach."
+      },
+      {
+            "question": "Which water park has a tropical storm/backstory theme?",
+            "answer": "Typhoon Lagoon."
+      },
+      {
+            "question": "Which Disney character is known for saying 'Oh boy!'?",
+            "answer": "Mickey Mouse."
+      },
+      {
+            "question": "Who is Mickey Mouse’s girlfriend?",
+            "answer": "Minnie Mouse."
+      },
+      {
+            "question": "Who is Donald Duck’s girlfriend?",
+            "answer": "Daisy Duck."
+      },
+      {
+            "question": "Who is Mickey Mouse’s dog?",
+            "answer": "Pluto."
+      },
+      {
+            "question": "Who is Mickey’s tall, clumsy friend?",
+            "answer": "Goofy."
+      },
+      {
+            "question": "What kind of animal is Donald Duck?",
+            "answer": "A duck."
+      },
+      {
+            "question": "Who created Mickey Mouse with Ub Iwerks?",
+            "answer": "Walt Disney."
+      },
+      {
+            "question": "What was Mickey Mouse’s first synchronized sound cartoon?",
+            "answer": "Steamboat Willie."
+      },
+      {
+            "question": "What year did Steamboat Willie debut?",
+            "answer": "1928."
+      },
+      {
+            "question": "Who is the fairy in Peter Pan?",
+            "answer": "Tinker Bell."
+      },
+      {
+            "question": "Who is the villain in The Little Mermaid?",
+            "answer": "Ursula."
+      },
+      {
+            "question": "Who is the crab in The Little Mermaid?",
+            "answer": "Sebastian."
+      },
+      {
+            "question": "Who is Ariel’s fish friend?",
+            "answer": "Flounder."
+      },
+      {
+            "question": "What is the name of Belle’s beastly host?",
+            "answer": "The Beast."
+      },
+      {
+            "question": "What enchanted candle appears in Beauty and the Beast?",
+            "answer": "Lumière."
+      },
+      {
+            "question": "What enchanted clock appears in Beauty and the Beast?",
+            "answer": "Cogsworth."
+      },
+      {
+            "question": "What enchanted teapot appears in Beauty and the Beast?",
+            "answer": "Mrs. Potts."
+      },
+      {
+            "question": "What is the name of Simba’s father?",
+            "answer": "Mufasa."
+      },
+      {
+            "question": "What is the name of Simba’s uncle?",
+            "answer": "Scar."
+      },
+      {
+            "question": "Who are Simba’s meerkat and warthog friends?",
+            "answer": "Timon and Pumbaa."
+      },
+      {
+            "question": "Which princess loses a glass slipper?",
+            "answer": "Cinderella."
+      },
+      {
+            "question": "Which princess has seven dwarf friends?",
+            "answer": "Snow White."
+      },
+      {
+            "question": "Which princess has very long magical hair?",
+            "answer": "Rapunzel."
+      },
+      {
+            "question": "Which princess is from Agrabah?",
+            "answer": "Jasmine."
+      },
+      {
+            "question": "Which princess is from Motunui?",
+            "answer": "Moana."
+      },
+      {
+            "question": "Which Frozen character sings 'Let It Go'?",
+            "answer": "Elsa."
+      },
+      {
+            "question": "Who is Elsa’s sister?",
+            "answer": "Anna."
+      },
+      {
+            "question": "What is the name of the snowman in Frozen?",
+            "answer": "Olaf."
+      },
+      {
+            "question": "What is the name of Kristoff’s reindeer?",
+            "answer": "Sven."
+      },
+      {
+            "question": "Which Pixar movie features Woody and Buzz Lightyear?",
+            "answer": "Toy Story."
+      },
+      {
+            "question": "What is the name of Andy’s cowboy toy?",
+            "answer": "Woody."
+      },
+      {
+            "question": "What is the name of the space ranger toy in Toy Story?",
+            "answer": "Buzz Lightyear."
+      },
+      {
+            "question": "What is the name of the cowgirl in Toy Story 2?",
+            "answer": "Jessie."
+      },
+      {
+            "question": "What Pixar movie features a rat who cooks?",
+            "answer": "Ratatouille."
+      },
+      {
+            "question": "What is the name of the rat in Ratatouille?",
+            "answer": "Remy."
+      },
+      {
+            "question": "What Pixar movie features emotions inside a girl’s mind?",
+            "answer": "Inside Out."
+      },
+      {
+            "question": "What Pixar movie features a family of superheroes?",
+            "answer": "The Incredibles."
+      },
+      {
+            "question": "What Pixar movie is set in the Land of the Dead?",
+            "answer": "Coco."
+      },
+      {
+            "question": "What Pixar movie features a clownfish searching for his son?",
+            "answer": "Finding Nemo."
+      },
+      {
+            "question": "What is Nemo’s father’s name?",
+            "answer": "Marlin."
+      },
+      {
+            "question": "What is the forgetful blue fish’s name?",
+            "answer": "Dory."
+      },
+      {
+            "question": "What Pixar movie is about a trash-compacting robot?",
+            "answer": "WALL-E."
+      },
+      {
+            "question": "What Pixar movie features a house lifted by balloons?",
+            "answer": "Up."
+      },
+      {
+            "question": "What is the old man’s name in Up?",
+            "answer": "Carl Fredricksen."
+      },
+      {
+            "question": "What is the Wilderness Explorer boy’s name in Up?",
+            "answer": "Russell."
+      },
+      {
+            "question": "Which Disney movie features a magic carpet?",
+            "answer": "Aladdin."
+      },
+      {
+            "question": "Which Disney movie features a genie in a lamp?",
+            "answer": "Aladdin."
+      },
+      {
+            "question": "Which Disney movie features the song 'Hakuna Matata'?",
+            "answer": "The Lion King."
+      },
+      {
+            "question": "Which Disney movie features the song 'Under the Sea'?",
+            "answer": "The Little Mermaid."
+      },
+      {
+            "question": "Which Disney movie features the song 'Be Our Guest'?",
+            "answer": "Beauty and the Beast."
+      },
+      {
+            "question": "Which Disney movie features the song 'A Whole New World'?",
+            "answer": "Aladdin."
+      },
+      {
+            "question": "Which Disney movie features the song 'How Far I’ll Go'?",
+            "answer": "Moana."
+      },
+      {
+            "question": "Which Disney movie features the Madrigal family?",
+            "answer": "Encanto."
+      },
+      {
+            "question": "What is Mirabel’s family name in Encanto?",
+            "answer": "Madrigal."
+      },
+      {
+            "question": "Which Encanto character is told 'We don’t talk about'?",
+            "answer": "Bruno."
+      },
+      {
+            "question": "Which Disney movie features a rabbit police officer named Judy Hopps?",
+            "answer": "Zootopia."
+      },
+      {
+            "question": "What is the fox’s name in Zootopia?",
+            "answer": "Nick Wilde."
+      },
+      {
+            "question": "Which Disney movie features Ralph and Vanellope?",
+            "answer": "Wreck-It Ralph."
+      },
+      {
+            "question": "Which Disney movie features Stitch?",
+            "answer": "Lilo & Stitch."
+      },
+      {
+            "question": "What is the name of the Hawaiian girl who adopts Stitch?",
+            "answer": "Lilo."
+      },
+      {
+            "question": "Which Disney movie features Baymax?",
+            "answer": "Big Hero 6."
+      },
+      {
+            "question": "Which Disney movie features a wooden puppet who wants to be real?",
+            "answer": "Pinocchio."
+      },
+      {
+            "question": "What is the name of Pinocchio’s conscience?",
+            "answer": "Jiminy Cricket."
+      },
+      {
+            "question": "Which Disney movie features a flying elephant?",
+            "answer": "Dumbo."
+      },
+      {
+            "question": "Which Disney movie features a deer named Bambi?",
+            "answer": "Bambi."
+      },
+      {
+            "question": "Which Disney movie features a bear named Baloo?",
+            "answer": "The Jungle Book."
+      },
+      {
+            "question": "Which Disney movie features Mowgli?",
+            "answer": "The Jungle Book."
+      },
+      {
+            "question": "Which Disney movie features a Dalmatian puppy family?",
+            "answer": "101 Dalmatians."
+      },
+      {
+            "question": "Which Disney villain wants the Dalmatian puppies?",
+            "answer": "Cruella de Vil."
+      },
+      {
+            "question": "Which Disney movie features Robin Hood as a fox?",
+            "answer": "Robin Hood."
+      },
+      {
+            "question": "Which Disney movie features Hercules and Pegasus?",
+            "answer": "Hercules."
+      },
+      {
+            "question": "Which Disney villain has a blue flame hairstyle?",
+            "answer": "Hades."
+      },
+      {
+            "question": "Which Disney movie features Mulan?",
+            "answer": "Mulan."
+      },
+      {
+            "question": "What is Mulan’s dragon companion named?",
+            "answer": "Mushu."
+      },
+      {
+            "question": "Which Disney movie features Pocahontas and Meeko?",
+            "answer": "Pocahontas."
+      },
+      {
+            "question": "Which Disney movie features Tiana?",
+            "answer": "The Princess and the Frog."
+      },
+      {
+            "question": "Which city is The Princess and the Frog associated with?",
+            "answer": "New Orleans."
+      },
+      {
+            "question": "Which Disney movie features a villain named Dr. Facilier?",
+            "answer": "The Princess and the Frog."
+      },
+      {
+            "question": "Which Disney movie features Quasimodo?",
+            "answer": "The Hunchback of Notre Dame."
+      },
+      {
+            "question": "Which Disney movie features Tarzan and Jane?",
+            "answer": "Tarzan."
+      },
+      {
+            "question": "Which Disney attraction inspired a movie starring pirates?",
             "answer": "Pirates of the Caribbean."
+      },
+      {
+            "question": "Which Disney attraction inspired a movie about a haunted house?",
+            "answer": "The Haunted Mansion."
+      },
+      {
+            "question": "Which Disney attraction has a skipper telling jokes on a boat?",
+            "answer": "Jungle Cruise."
+      },
+      {
+            "question": "Which Disney park icon is Cinderella Castle?",
+            "answer": "Magic Kingdom."
+      },
+      {
+            "question": "Which Disney park icon is Spaceship Earth?",
+            "answer": "EPCOT."
+      },
+      {
+            "question": "Which Disney park icon is the Tree of Life?",
+            "answer": "Animal Kingdom."
+      },
+      {
+            "question": "Which Disney park icon at Hollywood Studios is the Chinese Theatre?",
+            "answer": "Disney’s Hollywood Studios."
       }
 ];
     const packingItems = [
@@ -1432,13 +3162,15 @@
       "Portable fans",
       "Moleskin for blisters",
       "Light jacket or hoodie",
-      "Christmas shirts or matching outfits",
-      "Holiday ears or Santa hats",
       "Kids’ headphones or comfort items"
 ];
 
     let todayTrivia = null;
-    let currentHuntIndex = getDailyIndex(hiddenMickeyHunts.length);
+    let currentTriviaIndex = getDailyIndex(disneyTrivia.length);
+    let activeHuntArea = "All";
+    let activeAttraction = "All";
+    let filteredHuntIndexes = [];
+    let currentFilteredPosition = 0;
 
     function showPage(pageId) {
       document.querySelectorAll(".page").forEach(page => page.classList.remove("active"));
@@ -1502,48 +3234,180 @@
     }
 
     function huntMarkup(hunt) {
+      const landLine = hunt.land ? `<div class="hunt-area">${hunt.area} • ${hunt.land}</div>` : `<div class="hunt-area">${hunt.area}</div>`;
+      const attractionLine = hunt.attraction ? `<div class="hunt-location">${hunt.attraction}</div>` : `<div class="hunt-location">${hunt.location}</div>`;
+      const specificLine = hunt.attraction ? `<p><strong>Where:</strong> ${hunt.location}</p>` : "";
+      const photoMarkup = hunt.imageUrl
+        ? `<div class="hunt-photo-wrap">
+             <img class="hunt-photo" src="${hunt.imageUrl}" alt="Photo for ${hunt.attraction || hunt.location} Hidden Mickey" loading="lazy" />
+             <div class="hunt-photo-credit">${hunt.photoCredit || "Licensed photo"} • <a href="${hunt.licenseUrl}" target="_blank" rel="noopener">${hunt.licenseText || "Source"}</a></div>
+           </div>`
+        : `<div class="hunt-photo-placeholder">
+             📷 No clearly reusable photo added yet for this one. Best option: take your own picture on the trip and add it later.
+           </div>`;
       return `
-        <div class="hunt-area">${hunt.area}</div>
-        <div class="hunt-location">${hunt.location}</div>
+        ${landLine}
+        ${attractionLine}
+        ${specificLine}
+        ${photoMarkup}
         <p>${hunt.clue}</p>
       `;
     }
 
+    function getHuntAreas() {
+      return ["All", "Magic Kingdom", "EPCOT", "Hollywood Studios", "Animal Kingdom"];
+    }
+
+    function huntMatchesArea(hunt, area) {
+      if (area === "All") return true;
+      return hunt.area === area;
+    }
+
+    function huntMatchesAttraction(hunt, attraction) {
+      if (attraction === "All") return true;
+      return hunt.attraction === attraction || hunt.land === attraction;
+    }
+
+    function getAvailableAttractions() {
+      const matches = hiddenMickeyHunts.filter(hunt => huntMatchesArea(hunt, activeHuntArea));
+      const names = [...new Set(matches.map(hunt => hunt.attraction || hunt.land).filter(Boolean))];
+      return ["All", ...names.sort()];
+    }
+
+    function rebuildFilteredHunts(resetToDaily = false) {
+      filteredHuntIndexes = hiddenMickeyHunts
+        .map((hunt, index) => ({ hunt, index }))
+        .filter(item => huntMatchesArea(item.hunt, activeHuntArea))
+        .filter(item => huntMatchesAttraction(item.hunt, activeAttraction))
+        .map(item => item.index);
+
+      if (filteredHuntIndexes.length === 0) {
+        activeAttraction = "All";
+        filteredHuntIndexes = hiddenMickeyHunts
+          .map((hunt, index) => ({ hunt, index }))
+          .filter(item => huntMatchesArea(item.hunt, activeHuntArea))
+          .map(item => item.index);
+      }
+
+      if (resetToDaily) {
+        const dailyIndex = getDailyIndex(hiddenMickeyHunts.length);
+        const position = filteredHuntIndexes.indexOf(dailyIndex);
+        currentFilteredPosition = position >= 0 ? position : 0;
+      } else {
+        currentFilteredPosition = 0;
+      }
+    }
+
+    function renderAttractionFilters() {
+      const options = getAvailableAttractions().map(name => `
+        <option value="${name.replace(/"/g, "&quot;")}" ${name === activeAttraction ? "selected" : ""}>${name === "All" ? "All rides / areas" : name}</option>
+      `).join("");
+
+      const miniSelect = document.getElementById("miniAttractionFilter");
+      const fullSelect = document.getElementById("fullAttractionFilter");
+      if (miniSelect) miniSelect.innerHTML = options;
+      if (fullSelect) fullSelect.innerHTML = options;
+    }
+
+    function renderHuntFilters() {
+      const areas = getHuntAreas();
+      const markup = areas.map(area => `
+        <button class="filter-button ${area === activeHuntArea ? "active" : ""}" onclick="setHuntArea('${area.replace(/'/g, "\\'")}')">${area}</button>
+      `).join("");
+
+      const mini = document.getElementById("miniHuntFilters");
+      const full = document.getElementById("fullHuntFilters");
+      if (mini) mini.innerHTML = markup;
+      if (full) full.innerHTML = markup;
+      renderAttractionFilters();
+    }
+
+    function setHuntArea(area) {
+      activeHuntArea = area;
+      activeAttraction = "All";
+      rebuildFilteredHunts(false);
+      renderHuntFilters();
+      renderHunt();
+    }
+
+    function setAttractionFilter(attraction) {
+      activeAttraction = attraction;
+      rebuildFilteredHunts(false);
+      renderAttractionFilters();
+      renderHunt();
+    }
+
     function renderHunt() {
-      const hunt = hiddenMickeyHunts[currentHuntIndex];
+      if (!filteredHuntIndexes.length) rebuildFilteredHunts(true);
+      const actualIndex = filteredHuntIndexes[currentFilteredPosition];
+      const hunt = hiddenMickeyHunts[actualIndex];
+
       document.getElementById("miniHiddenMickey").innerHTML = huntMarkup(hunt);
       document.getElementById("hiddenMickeyTip").innerHTML = huntMarkup(hunt);
+
+      const label = activeHuntArea === "All" ? "All Parks" : activeHuntArea;
+      const attractionLabel = activeAttraction === "All" ? "All rides / areas" : activeAttraction;
       document.getElementById("hiddenMickeyCounter").textContent =
-        `Hidden Mickey Hunt ${currentHuntIndex + 1} of ${hiddenMickeyHunts.length}`;
+        `${label} • ${attractionLabel}: Hunt ${currentFilteredPosition + 1} of ${filteredHuntIndexes.length} • Overall ${actualIndex + 1} of ${hiddenMickeyHunts.length}`;
     }
 
     function nextHunt() {
-      currentHuntIndex = (currentHuntIndex + 1) % hiddenMickeyHunts.length;
+      if (!filteredHuntIndexes.length) rebuildFilteredHunts(true);
+      currentFilteredPosition = (currentFilteredPosition + 1) % filteredHuntIndexes.length;
       renderHunt();
     }
 
     function prevHunt() {
-      currentHuntIndex = (currentHuntIndex - 1 + hiddenMickeyHunts.length) % hiddenMickeyHunts.length;
+      if (!filteredHuntIndexes.length) rebuildFilteredHunts(true);
+      currentFilteredPosition = (currentFilteredPosition - 1 + filteredHuntIndexes.length) % filteredHuntIndexes.length;
       renderHunt();
     }
 
     function randomHunt() {
-      currentHuntIndex = Math.floor(Math.random() * hiddenMickeyHunts.length);
+      if (!filteredHuntIndexes.length) rebuildFilteredHunts(true);
+      currentFilteredPosition = Math.floor(Math.random() * filteredHuntIndexes.length);
       renderHunt();
     }
 
     function dailyHunt() {
-      currentHuntIndex = getDailyIndex(hiddenMickeyHunts.length);
+      activeHuntArea = "All";
+      activeAttraction = "All";
+      rebuildFilteredHunts(true);
+      renderHuntFilters();
       renderHunt();
     }
 
     function renderTrivia() {
-      const triviaIndex = getDailyIndex(disneyTrivia.length);
-      todayTrivia = disneyTrivia[triviaIndex];
+      todayTrivia = disneyTrivia[currentTriviaIndex];
+
       document.getElementById("miniTrivia").textContent = todayTrivia.question;
       document.getElementById("triviaQuestion").textContent = todayTrivia.question;
       document.getElementById("miniTriviaAnswer").textContent = todayTrivia.answer;
       document.getElementById("triviaAnswer").textContent = todayTrivia.answer;
+
+      const counterText = `Trivia ${currentTriviaIndex + 1} of ${disneyTrivia.length}`;
+      const miniCounter = document.getElementById("miniTriviaCounter");
+      const fullCounter = document.getElementById("triviaCounter");
+      if (miniCounter) miniCounter.textContent = counterText;
+      if (fullCounter) fullCounter.textContent = counterText;
+
+      document.getElementById("miniTriviaAnswer").classList.remove("show");
+      document.getElementById("triviaAnswer").classList.remove("show");
+    }
+
+    function nextTrivia() {
+      currentTriviaIndex = (currentTriviaIndex + 1) % disneyTrivia.length;
+      renderTrivia();
+    }
+
+    function prevTrivia() {
+      currentTriviaIndex = (currentTriviaIndex - 1 + disneyTrivia.length) % disneyTrivia.length;
+      renderTrivia();
+    }
+
+    function randomTrivia() {
+      currentTriviaIndex = Math.floor(Math.random() * disneyTrivia.length);
+      renderTrivia();
     }
 
     function toggleTriviaAnswer(answerId) {
@@ -1638,6 +3502,8 @@
     }
 
     renderCountdownCards();
+    rebuildFilteredHunts(true);
+    renderHuntFilters();
     renderHunt();
     renderTrivia();
     renderPackingList();
